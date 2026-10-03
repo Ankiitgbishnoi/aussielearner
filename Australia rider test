@@ -1,6 +1,58 @@
-📁 victoria-rider-practice
-
-├── 📄 index.html
-├── 📄 style.css
-├── 📄 questions.js
-└── 📄 app.js
+aussie-learner/
+│
+├── public/
+│   └── images/
+│       ├── hero-car.jpg
+│       ├── car.jpg
+│       ├── motorcycle.jpg
+│       ├── truck.jpg
+│       ├── bicycle.jpg
+│       └── pedestrian.jpg
+│
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── globals.css
+│   │   │
+│   │   ├── tests/
+│   │   │   ├── page.tsx
+│   │   │   └── [testId]/
+│   │   │       └── page.tsx
+│   │   │
+│   │   ├── results/
+│   │   │   └── [attemptId]/
+│   │   │       └── page.tsx
+│   │   │
+│   │   ├── road-rules/
+│   │   │   └── page.tsx
+│   │   │
+│   │   └── progress/
+│   │       └── page.tsx
+│   │
+│   ├── components/
+│   │   ├── Navbar.tsx
+│   │   ├── Hero.tsx
+│   │   ├── LicenceCard.tsx
+│   │   ├── StateSelector.tsx
+│   │   ├── FeatureSection.tsx
+│   │   ├── Footer.tsx
+│   │   └── TestRunner.tsx
+│   │
+│   ├── data/
+│   │   ├── tests.ts
+│   │   └── questions.ts
+│   │
+│   ├── lib/
+│   │   ├── scoring.ts
+│   │   └── storage.ts
+│   │
+│   └── types/
+│       └── index.ts
+│
+├── .gitignore
+├── next.config.ts
+├── package.json
+├── postcss.config.mjs
+├── tsconfig.json
+└── README.md
