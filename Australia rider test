@@ -1,3 +1,10 @@
+TypeScript        Yes
+ESLint            Yes
+Tailwind CSS      Yes
+src/ directory    Yes
+App Router        Yes
+Turbopack         Yes
+Import alias      @/*
 aussie-learner/
 │
 ├── public/
