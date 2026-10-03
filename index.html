@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Victoria Rider Practice</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="topbar">
+        <div class="logo">
+            🏍️ Victoria Rider
+        </div>
+
+        <div class="header-tag">
+            Unofficial practice
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- HOME SCREEN -->
+
+        <section id="homeScreen" class="screen active">
+
+            <div class="hero">
+
+                <div class="hero-icon">
+                    🏍️
+                </div>
+
+                <h1>Victoria Rider Practice</h1>
+
+                <p>
+                    Practice Victorian road-rule and motorcycle
+                    knowledge questions before your test.
+                </p>
+
+                <div class="notice">
+                    ⚠️ This is an unofficial practice website.
+                    It is not affiliated with VicRoads.
+                </div>
+
+            </div>
+
+
+            <div class="test-options">
+
+                <div class="test-card">
+
+                    <span class="card-icon">📘</span>
+
+                    <h2>Learner Practice</h2>
+
+                    <p>
+                        Practice general road-rule questions.
+                    </p>
+
+                    <div class="stats">
+                        <span>32 questions</span>
+                        <span>25 to pass</span>
+                    </div>
+
+                    <button onclick="startTest('learner')">
+                        Start Learner Test
+                    </button>
+
+                </div>
+
+
+                <div class="test-card motorcycle">
+
+                    <span class="card-icon">🏍️</span>
+
+                    <h2>Motorcycle Practice</h2>
+
+                    <p>
+                        Practice motorcycle-focused scenarios.
+                    </p>
+
+                    <div class="stats">
+                        <span>32 questions</span>
+                        <span>25 to pass</span>
+                    </div>
+
+                    <button onclick="startTest('motorcycle')">
+                        Start Motorcycle Test
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="features">
+
+                <div>
+                    <strong>🔥</strong>
+                    <span>Practice streak</span>
+                </div>
+
+                <div>
+                    <strong>⏱️</strong>
+                    <span>Timed tests</span>
+                </div>
+
+                <div>
+                    <strong>📊</strong>
+                    <span>Track scores</span>
+                </div>
+
+                <div>
+                    <strong>🎯</strong>
+                    <span>Review mistakes</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUIZ SCREEN -->
+
+        <section id="quizScreen" class="screen">
+
+            <div class="quiz-header">
+
+                <button class="back-button" onclick="goHome()">
+                    ← Exit
+                </button>
+
+                <div class="quiz-title" id="quizTitle">
+                    Practice Test
+                </div>
+
+                <div class="timer" id="timer">
+                    30:00
+                </div>
+
+            </div>
+
+
+            <div class="progress-container">
+
+                <div class="progress-text">
+
+                    <span id="questionNumber">
+                        Question 1 / 32
+                    </span>
+
+                    <span id="scoreDisplay">
+                        Score: 0
+                    </span>
+
+                </div>
+
+                <div class="progress-bar">
+
+                    <div
+                        id="progressBar"
+                        class="progress-fill">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="question-card">
+
+                <div class="question-category" id="category">
+                    ROAD RULES
+                </div>
+
+                <h2 id="question">
+                    Question goes here
+                </h2>
+
+
+                <div id="answers" class="answers">
+
+                    <!-- JavaScript inserts answers -->
+
+                </div>
+
+
+                <div id="explanation" class="explanation hidden">
+
+                </div>
+
+
+                <button
+                    id="nextButton"
+                    class="next-button"
+                    onclick="nextQuestion()"
+                    disabled>
+
+                    Next Question →
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESULTS SCREEN -->
+
+        <section id="resultScreen" class="screen">
+
+            <div class="result-card">
+
+                <div id="resultIcon" class="result-icon">
+                    🏆
+                </div>
+
+                <h1 id="resultTitle">
+                    Test Complete
+                </h1>
+
+                <div class="big-score">
+
+                    <span id="finalScore">
+                        27
+                    </span>
+
+                    <small>/ 32</small>
+
+                </div>
+
+                <p id="resultMessage">
+                    You passed the practice test.
+                </p>
+
+
+                <div class="result-stats">
+
+                    <div>
+                        <strong id="correctAnswers">
+                            27
+                        </strong>
+
+                        <span>Correct</span>
+                    </div>
+
+                    <div>
+                        <strong id="incorrectAnswers">
+                            5
+                        </strong>
+
+                        <span>Incorrect</span>
+                    </div>
+
+                    <div>
+                        <strong id="passMark">
+                            25
+                        </strong>
+
+                        <span>Pass mark</span>
+                    </div>
+
+                </div>
+
+
+                <div class="result-actions">
+
+                    <button onclick="restartTest()">
+                        🔄 Try Again
+                    </button>
+
+                    <button
+                        class="secondary"
+                        onclick="goHome()">
+
+                        ← Choose Test
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            Victoria Rider Practice
+        </p>
+
+        <p>
+            Unofficial educational practice tool.
+        </p>
+
+    </footer>
+
+
+    <script src="questions.js"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>
