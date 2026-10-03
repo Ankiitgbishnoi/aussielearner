@@ -1,4 +1,2806 @@
-index.html
-app.js
-questions.js
-style.css
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Aussie Learner | Australian Driver Test Practice</title>
+
+  <meta
+    name="description"
+    content="Aussie Learner - Australian road rules and driver test practice."
+  />
+
+  <style>
+    :root {
+      --green: #22c55e;
+      --green-light: #4ade80;
+      --green-dark: #15803d;
+      --navy: #06111f;
+      --navy-2: #0b1b2e;
+      --slate: #64748b;
+      --light: #f5f7fa;
+      --white: #ffffff;
+      --red: #ef4444;
+      --orange: #f59e0b;
+      --border: #e2e8f0;
+      --shadow: 0 20px 60px rgba(15, 23, 42, .10);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      color: #0f172a;
+      background: var(--light);
+      overflow-x: hidden;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: 76px;
+      background: rgba(6, 17, 31, .90);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      max-width: 1240px;
+      height: 100%;
+      margin: auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      font-weight: 900;
+      letter-spacing: -.5px;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: linear-gradient(135deg, var(--green), var(--green-light));
+      display: grid;
+      place-items: center;
+      font-size: 21px;
+      box-shadow: 0 8px 25px rgba(34,197,94,.25);
+    }
+
+    .brand-text {
+      font-size: 18px;
+    }
+
+    .brand-sub {
+      display: block;
+      font-size: 8px;
+      color: #94a3b8;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links button {
+      border: 0;
+      background: none;
+      color: #cbd5e1;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .nav-links button:hover {
+      color: white;
+    }
+
+    .nav-start {
+      background: var(--green) !important;
+      color: #04120a !important;
+      padding: 11px 18px;
+      border-radius: 999px;
+    }
+
+    .mobile-menu {
+      display: none;
+      background: transparent;
+      color: white;
+      border: 0;
+      font-size: 25px;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 790px;
+      padding: 150px 24px 100px;
+      background:
+        radial-gradient(circle at 80% 30%, rgba(34,197,94,.18), transparent 30%),
+        linear-gradient(110deg, #04101d 0%, #081a2c 52%, #07182a 100%);
+      position: relative;
+      overflow: hidden;
+      color: white;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(4,16,29,.97), rgba(4,16,29,.68), rgba(4,16,29,.18)),
+        url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2200&q=85")
+        center/cover;
+      opacity: .72;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 220px;
+      background: linear-gradient(transparent, #06111f);
+    }
+
+    .hero-content {
+      max-width: 1240px;
+      margin: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 15px;
+      border: 1px solid rgba(74,222,128,.25);
+      border-radius: 999px;
+      background: rgba(34,197,94,.10);
+      color: #86efac;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-size: clamp(52px, 8vw, 94px);
+      line-height: .94;
+      letter-spacing: -5px;
+      font-weight: 950;
+    }
+
+    .hero h1 span {
+      color: var(--green-light);
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin-top: 28px;
+      color: #cbd5e1;
+      font-size: 19px;
+      line-height: 1.75;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      margin-top: 35px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 15px 24px;
+      font-weight: 900;
+      transition: .25s ease;
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: #04120a;
+      box-shadow: 0 15px 35px rgba(34,197,94,.20);
+    }
+
+    .btn-primary:hover {
+      background: var(--green-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-dark {
+      color: white;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-dark:hover {
+      background: rgba(255,255,255,.16);
+    }
+
+    /* =========================
+       FEATURE STRIP
+    ========================= */
+
+    .feature-strip {
+      position: relative;
+      z-index: 5;
+      margin-top: -60px;
+      padding: 0 24px;
+    }
+
+    .features {
+      max-width: 1240px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .feature {
+      background: white;
+      padding: 25px;
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .feature-icon {
+      font-size: 25px;
+    }
+
+    .feature h3 {
+      margin-top: 12px;
+      font-size: 16px;
+    }
+
+    .feature p {
+      margin-top: 6px;
+      color: var(--slate);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* =========================
+       SECTIONS
+    ========================= */
+
+    .section {
+      padding: 100px 24px;
+    }
+
+    .section-light {
+      background: white;
+    }
+
+    .section-dark {
+      background: var(--navy);
+      color: white;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: auto;
+    }
+
+    .section-heading {
+      max-width: 700px;
+      margin-bottom: 50px;
+    }
+
+    .section-label {
+      color: var(--green-dark);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .section-dark .section-label {
+      color: var(--green-light);
+    }
+
+    .section-heading h2 {
+      font-size: clamp(38px, 5vw, 58px);
+      line-height: 1;
+      letter-spacing: -2px;
+      margin-top: 10px;
+      font-weight: 950;
+    }
+
+    .section-heading p {
+      margin-top: 18px;
+      color: var(--slate);
+      line-height: 1.7;
+    }
+
+    .section-dark .section-heading p {
+      color: #94a3b8;
+    }
+
+    /* =========================
+       LICENCE CARDS
+    ========================= */
+
+    .licence-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .licence-card {
+      min-height: 250px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 26px;
+      background: #0f172a;
+      border: 1px solid rgba(255,255,255,.08);
+      cursor: pointer;
+      transition: .35s ease;
+    }
+
+    .licence-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 60px rgba(2,8,23,.25);
+    }
+
+    .licence-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(0,0,0,.95), rgba(0,0,0,.15)),
+        var(--card-image) center/cover;
+      transition: .5s ease;
+    }
+
+    .licence-card:hover::before {
+      transform: scale(1.07);
+    }
+
+    .licence-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 25px;
+      color: white;
+    }
+
+    .licence-code {
+      color: #86efac;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .licence-content h3 {
+      font-size: 25px;
+      margin-top: 5px;
+    }
+
+    .licence-content p {
+      color: #cbd5e1;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 6px;
+    }
+
+    /* =========================
+       STATE SELECTOR
+    ========================= */
+
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .state {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+      text-align: left;
+      transition: .25s;
+    }
+
+    .state:hover,
+    .state.selected {
+      border-color: var(--green);
+      background: #f0fdf4;
+      transform: translateY(-2px);
+    }
+
+    .state-code {
+      font-size: 21px;
+      font-weight: 950;
+    }
+
+    .state-name {
+      margin-top: 4px;
+      color: var(--slate);
+      font-size: 13px;
+    }
+
+    /* =========================
+       TEST SCREEN
+    ========================= */
+
+    #testScreen {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 90% 10%, rgba(34,197,94,.12), transparent 25%),
+        var(--navy);
+      color: white;
+      padding: 105px 20px 60px;
+    }
+
+    .test-wrap {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .test-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .test-name {
+      font-weight: 900;
+    }
+
+    .timer {
+      background: rgba(255,255,255,.08);
+      padding: 10px 15px;
+      border-radius: 999px;
+      color: #86efac;
+      font-weight: 900;
+      min-width: 85px;
+      text-align: center;
+    }
+
+    .test-progress {
+      height: 7px;
+      background: rgba(255,255,255,.10);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .test-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--green);
+      transition: width .35s ease;
+    }
+
+    .question-meta {
+      display: flex;
+      justify-content: space-between;
+      color: #94a3b8;
+      font-size: 13px;
+      margin: 13px 0 25px;
+    }
+
+    .question-card {
+      background: white;
+      color: #0f172a;
+      border-radius: 30px;
+      padding: 35px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.22);
+      animation: slideIn .35s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .topic {
+      color: var(--green-dark);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .question-card h2 {
+      font-size: clamp(24px, 4vw, 37px);
+      line-height: 1.15;
+      margin-top: 14px;
+    }
+
+    .answers {
+      display: grid;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .answer {
+      width: 100%;
+      text-align: left;
+      border: 2px solid #e2e8f0;
+      background: white;
+      border-radius: 17px;
+      padding: 17px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      transition: .2s;
+    }
+
+    .answer:hover {
+      border-color: #94a3b8;
+      background: #f8fafc;
+    }
+
+    .answer.selected {
+      border-color: var(--green);
+      background: #f0fdf4;
+    }
+
+    .answer-letter {
+      width: 34px;
+      height: 34px;
+      min-width: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #f1f5f9;
+      color: #64748b;
+      font-weight: 900;
+    }
+
+    .answer.selected .answer-letter {
+      background: var(--green);
+      color: #04120a;
+    }
+
+    .test-controls {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .control {
+      border: 1px solid rgba(255,255,255,.12);
+      color: white;
+      background: rgba(255,255,255,.06);
+      border-radius: 999px;
+      padding: 13px 20px;
+      font-weight: 800;
+    }
+
+    .control:disabled {
+      opacity: .3;
+      cursor: not-allowed;
+    }
+
+    .control.finish {
+      background: var(--green);
+      color: #04120a;
+      border: 0;
+    }
+
+    /* =========================
+       RESULTS
+    ========================= */
+
+    #resultsScreen {
+      min-height: 100vh;
+      background: #f5f7fa;
+      padding: 125px 20px 80px;
+    }
+
+    .results-wrap {
+      max-width: 950px;
+      margin: auto;
+    }
+
+    .result-hero {
+      background: var(--navy);
+      color: white;
+      border-radius: 32px;
+      padding: 50px 30px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .result-icon {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      margin: auto;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,.08);
+      font-size: 42px;
+    }
+
+    .result-score {
+      font-size: 76px;
+      line-height: 1;
+      font-weight: 950;
+      margin-top: 25px;
+    }
+
+    .result-status {
+      margin-top: 12px;
+      font-weight: 950;
+      font-size: 22px;
+    }
+
+    .pass {
+      color: var(--green-light);
+    }
+
+    .fail {
+      color: #fca5a5;
+    }
+
+    .result-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 18px;
+    }
+
+    .result-card {
+      background: white;
+      padding: 27px;
+      text-align: center;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+    }
+
+    .result-card strong {
+      display: block;
+      font-size: 35px;
+      font-weight: 950;
+    }
+
+    .result-card span {
+      display: block;
+      margin-top: 5px;
+      color: var(--slate);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .report {
+      background: white;
+      border-radius: 25px;
+      padding: 30px;
+      margin-top: 18px;
+      border: 1px solid var(--border);
+    }
+
+    .report h2 {
+      font-size: 25px;
+    }
+
+    .report p {
+      margin-top: 8px;
+      color: var(--slate);
+    }
+
+    .result-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .result-actions button {
+      flex: 1;
+    }
+
+    /* =========================
+       PROGRESS
+    ========================= */
+
+    .progress-panel {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 30px;
+      max-width: 700px;
+    }
+
+    .progress-number {
+      font-size: 60px;
+      font-weight: 950;
+    }
+
+    .history {
+      margin-top: 25px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .history-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: 15px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      background: var(--navy);
+      color: white;
+      padding: 60px 24px;
+    }
+
+    .footer-inner {
+      max-width: 1240px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .footer-inner p {
+      max-width: 500px;
+      margin-top: 12px;
+      color: #94a3b8;
+      line-height: 1.7;
+      font-size: 13px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 900px) {
+      .features,
+      .licence-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .state-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .hero {
+        min-height: 720px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding-top: 125px;
+        min-height: 700px;
+      }
+
+      .hero h1 {
+        letter-spacing: -3px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .features,
+      .licence-grid,
+      .state-grid,
+      .result-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .question-card {
+        padding: 24px 18px;
+      }
+
+      .result-actions {
+        flex-direction: column;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+
+      .test-controls {
+        gap: 10px;
+      }
+
+      .control {
+        padding: 11px 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="navbar">
+  <div class="nav-inner">
+
+    <button class="brand" onclick="showHome()">
+      <span class="brand-icon">🚗</span>
+
+      <span class="brand-text">
+        Aussie Learner
+        <small class="brand-sub">
+          Learn • Practise • Drive
+        </small>
+      </span>
+    </button>
+
+    <nav class="nav-links">
+      <button onclick="showHome()">Home</button>
+      <button onclick="scrollToTests()">Tests</button>
+      <button onclick="scrollToStates()">States</button>
+      <button onclick="showProgress()">Progress</button>
+
+      <button class="nav-start" onclick="scrollToTests()">
+        Start Test
+      </button>
+    </nav>
+
+    <button class="mobile-menu" onclick="scrollToTests()">
+      ☰
+    </button>
+
+  </div>
+</header>
+
+
+<!-- =========================
+     HOME
+========================= -->
+
+<main id="homeScreen">
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="hero-copy">
+
+        <div class="eyebrow">
+          🛡️ Australian driver test preparation
+        </div>
+
+        <h1>
+          Learn the rules.
+          <span>Drive with confidence.</span>
+        </h1>
+
+        <p>
+          Practise Australian road-rule questions, choose your
+          state and licence category, complete realistic tests and
+          see your complete result at the end.
+        </p>
+
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="scrollToTests()">
+            Start Practising →
+          </button>
+
+          <button class="btn btn-dark" onclick="scrollToStates()">
+            Choose Your State
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FEATURES -->
+
+  <section class="feature-strip">
+
+    <div class="features">
+
+      <div class="feature">
+        <div class="feature-icon">📝</div>
+        <h3>Realistic Practice</h3>
+        <p>
+          Structured questions designed around road-rule topics.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🗺️</div>
+        <h3>Australia Wide</h3>
+        <p>
+          Built to support different state and territory rules.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🎯</div>
+        <h3>Results at the End</h3>
+        <p>
+          No correct or incorrect feedback while you answer.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">📊</div>
+        <h3>Track Progress</h3>
+        <p>
+          Keep your previous results on your device.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- TEST TYPES -->
+
+  <section id="testsSection" class="section section-dark">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <div class="section-label">
+          Choose your test
+        </div>
+
+        <h2>
+          What are you learning for?
+        </h2>
+
+        <p>
+          Choose a road-user or licence category to begin.
+          Test settings can be configured independently for each
+          jurisdiction.
+        </p>
+
+      </div>
+
+
+      <div class="licence-grid">
+
+        <div
+          class="licence-card"
+          style="--card-image: url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=900&q=80')"
+          onclick="chooseLicence('PEDESTRIAN')"
+        >
+          <div class="licence-content">
+            <div class="licence-code">ROAD USER</div>
+            <h3>Pedestrian</h3>
+            <p>Pedestrian safety and road awareness.</p>
+          </div>
+        </div>
+
+
+        <div
+          class="licence-card"
+          style="--card-image: url('https://images.unsplash.com/photo-1502744688674-c619d1586c9e?auto=format&fit=crop&w=900&q=80')"
+          onclick="chooseLicence('BIKE')"
+        >
+          <div class="licence-content">
+            <div class="licence-code">ROAD USER</div>
+            <h3>Bike</h3>
+            <p>Bicycle road rules and safe riding.</p>
+          </div>
+        </div>
+
+
+        <div
+          class="licence-card"
+          style="--card-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80')"
+          onclick="chooseLicence('CAR')"
+        >
+          <div class="licence-content">
+            <div class="licence-code">LICENCE</div>
+            <h3>Car</h3>
+            <p>Learner and driver knowledge practice.</p>
+          </div>
+        </div>
+
+
+        <div
+          class="licence-card"
+          style="--card-image: url('https://images.unsplash.com/photo-1558980664-10ea9a4d3f1d?auto=format&fit=crop&w=900&q=80')"
+          onclick="chooseLicence('MOTORCYCLE')"
+        >
+          <div class="licence-content">
+            <div class="licence-code">LICENCE</div>
+            <h3>Motorcycle</h3>
+            <p>Motorcycle safety and road rules.</p>
+          </div>
+        </div>
+
+
+        <div
+          class="licence-card"
+          style="--card-image: url('https://images.unsplash.com/photo-1586191582151-f73872dfd42c?auto=format&fit=crop&w=900&q=80')"
+          onclick="chooseLicence('MR')"
+        >
+          <div class="licence-content">
+            <div class="licence-code">HEAVY VEHICLE</div>
+            <h3>MR</h3>
+            <p>Medium rigid vehicle practice.</p>
+          </div>
+        </div>
+
+
+        <div
+          class="licence-card"
+          style="--card-image: url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d8?auto=format&fit=crop&w=900&q=80')"
+          onclick="chooseLicence('HR')"
+        >
+          <div class="licence-content">
+            <div class="licence-code">HEAVY VEHICLE</div>
+            <h3>HR</h3>
+            <p>Heavy rigid vehicle practice.</p>
+          </div>
+        </div>
+
+
+        <div
+          class="licence-card"
+          style="--card-image: url('https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=900&q=80')"
+          onclick="chooseLicence('HC')"
+        >
+          <div class="licence-content">
+            <div class="licence-code">HEAVY VEHICLE</div>
+            <h3>HC</h3>
+            <p>Heavy combination practice.</p>
+          </div>
+        </div>
+
+
+        <div
+          class="licence-card"
+          style="--card-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=80')"
+          onclick="chooseLicence('MC')"
+        >
+          <div class="licence-content">
+            <div class="licence-code">HEAVY VEHICLE</div>
+            <h3>MC</h3>
+            <p>Multi-combination vehicle practice.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- STATES -->
+
+  <section id="statesSection" class="section section-light">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <div class="section-label">
+          Choose your location
+        </div>
+
+        <h2>
+          Road rules can vary by state.
+        </h2>
+
+        <p>
+          Select your state or territory before beginning your test.
+          The question bank should be populated with verified rules
+          for that jurisdiction.
+        </p>
+
+      </div>
+
+
+      <div class="state-grid">
+
+        <button class="state selected" onclick="selectState(this,'VIC')">
+          <div class="state-code">VIC</div>
+          <div class="state-name">Victoria</div>
+        </button>
+
+        <button class="state" onclick="selectState(this,'NSW')">
+          <div class="state-code">NSW</div>
+          <div class="state-name">New South Wales</div>
+        </button>
+
+        <button class="state" onclick="selectState(this,'QLD')">
+          <div class="state-code">QLD</div>
+          <div class="state-name">Queensland</div>
+        </button>
+
+        <button class="state" onclick="selectState(this,'SA')">
+          <div class="state-code">SA</div>
+          <div class="state-name">South Australia</div>
+        </button>
+
+        <button class="state" onclick="selectState(this,'WA')">
+          <div class="state-code">WA</div>
+          <div class="state-name">Western Australia</div>
+        </button>
+
+        <button class="state" onclick="selectState(this,'TAS')">
+          <div class="state-code">TAS</div>
+          <div class="state-name">Tasmania</div>
+        </button>
+
+        <button class="state" onclick="selectState(this,'NT')">
+          <div class="state-code">NT</div>
+          <div class="state-name">Northern Territory</div>
+        </button>
+
+        <button class="state" onclick="selectState(this,'ACT')">
+          <div class="state-code">ACT</div>
+          <div class="state-name">Australian Capital Territory</div>
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- HOW IT WORKS -->
+
+  <section class="section section-light">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <div class="section-label">
+          Simple process
+        </div>
+
+        <h2>
+          Practice without the pressure.
+        </h2>
+
+      </div>
+
+      <div class="features">
+
+        <div class="feature">
+          <div class="feature-icon">1️⃣</div>
+          <h3>Choose your state</h3>
+          <p>
+            Select the jurisdiction you are preparing for.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">2️⃣</div>
+          <h3>Choose your test</h3>
+          <p>
+            Select car, motorcycle, heavy vehicle or road-user practice.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">3️⃣</div>
+          <h3>Answer everything</h3>
+          <p>
+            Move through the complete test without seeing your score.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">4️⃣</div>
+          <h3>See your report</h3>
+          <p>
+            Your correct, incorrect and final percentage appear at the end.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CTA -->
+
+  <section class="section section-dark">
+
+    <div class="container" style="text-align:center">
+
+      <div class="section-heading" style="margin:0 auto">
+
+        <div class="section-label">
+          Ready?
+        </div>
+
+        <h2>
+          Start your next practice test.
+        </h2>
+
+        <p>
+          Choose your state and licence category to begin.
+        </p>
+
+        <button
+          class="btn btn-primary"
+          style="margin-top:25px"
+          onclick="scrollToTests()"
+        >
+          Start Practising →
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- =========================
+     TEST SCREEN
+========================= -->
+
+<section id="testScreen" class="hidden">
+
+  <div class="test-wrap">
+
+    <div class="test-top">
+
+      <button
+        class="control"
+        onclick="exitTest()"
+      >
+        ← Exit
+      </button>
+
+      <div class="test-name" id="testTitle">
+        Aussie Learner Practice
+      </div>
+
+      <div class="timer" id="timer">
+        30:00
+      </div>
+
+    </div>
+
+
+    <div class="test-progress">
+      <div
+        id="testProgressBar"
+        class="test-progress-bar"
+      ></div>
+    </div>
+
+
+    <div class="question-meta">
+
+      <span id="questionNumber">
+        Question 1 / 10
+      </span>
+
+      <span>
+        Complete the test before seeing results
+      </span>
+
+    </div>
+
+
+    <div id="questionCard" class="question-card">
+
+      <div
+        id="questionTopic"
+        class="topic"
+      >
+        ROAD RULES
+      </div>
+
+      <h2 id="questionText">
+        Question
+      </h2>
+
+      <div
+        id="answers"
+        class="answers"
+      ></div>
+
+    </div>
+
+
+    <div class="test-controls">
+
+      <button
+        id="previousButton"
+        class="control"
+        onclick="previousQuestion()"
+      >
+        ← Previous
+      </button>
+
+      <button
+        id="nextButton"
+        class="control finish"
+        onclick="nextQuestion()"
+        disabled
+      >
+        Next →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     RESULTS
+========================= -->
+
+<section id="resultsScreen" class="hidden">
+
+  <div class="results-wrap">
+
+    <div class="result-hero">
+
+      <div
+        id="resultIcon"
+        class="result-icon"
+      >
+        🏆
+      </div>
+
+      <div
+        id="resultScore"
+        class="result-score"
+      >
+        0%
+      </div>
+
+      <div
+        id="resultStatus"
+        class="result-status"
+      >
+        TEST COMPLETE
+      </div>
+
+      <p
+        id="resultDescription"
+        style="margin-top:10px;color:#94a3b8"
+      ></p>
+
+    </div>
+
+
+    <div class="result-cards">
+
+      <div class="result-card">
+        <strong id="totalResult">0</strong>
+        <span>Total Questions</span>
+      </div>
+
+      <div class="result-card">
+        <strong
+          id="correctResult"
+          style="color:#16a34a"
+        >
+          0
+        </strong>
+        <span>Correct</span>
+      </div>
+
+      <div class="result-card">
+        <strong
+          id="incorrectResult"
+          style="color:#ef4444"
+        >
+          0
+        </strong>
+        <span>Incorrect</span>
+      </div>
+
+    </div>
+
+
+    <div class="report">
+
+      <h2>Your final report</h2>
+
+      <p id="reportText"></p>
+
+      <div
+        style="
+          margin-top:22px;
+          height:12px;
+          background:#e2e8f0;
+          border-radius:999px;
+          overflow:hidden;
+        "
+      >
+        <div
+          id="resultProgress"
+          style="
+            width:0%;
+            height:100%;
+            background:#22c55e;
+            transition:width .6s ease;
+          "
+        ></div>
+      </div>
+
+    </div>
+
+
+    <div class="report">
+
+      <h2>Test information</h2>
+
+      <p>
+        State:
+        <strong id="resultState">VIC</strong>
+      </p>
+
+      <p>
+        Category:
+        <strong id="resultCategory">CAR</strong>
+      </p>
+
+      <p>
+        Pass requirement:
+        <strong id="resultPassRequirement">—</strong>
+      </p>
+
+    </div>
+
+
+    <div class="result-actions">
+
+      <button
+        class="btn btn-primary"
+        onclick="restartTest()"
+      >
+        🔄 Try Again
+      </button>
+
+      <button
+        class="btn"
+        style="
+          background:white;
+          border:1px solid #e2e8f0;
+        "
+        onclick="showHome()"
+      >
+        ← Home
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     PROGRESS
+========================= -->
+
+<section id="progressScreen" class="hidden">
+
+  <div
+    class="section"
+    style="min-height:100vh"
+  >
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <div class="section-label">
+          Your progress
+        </div>
+
+        <h2>
+          Keep improving.
+        </h2>
+
+        <p>
+          Your completed practice results are stored locally
+          in your browser.
+        </p>
+
+      </div>
+
+
+      <div class="progress-panel">
+
+        <div class="progress-number" id="progressAverage">
+          0%
+        </div>
+
+        <p>
+          Average practice score
+        </p>
+
+        <div
+          id="history"
+          class="history"
+        ></div>
+
+        <button
+          class="btn btn-primary"
+          style="margin-top:25px"
+          onclick="showHome()"
+        >
+          ← Back Home
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+  <div class="footer-inner">
+
+    <div>
+
+      <div class="brand">
+
+        <span class="brand-icon">
+          🚗
+        </span>
+
+        <span class="brand-text">
+          Aussie Learner
+          <small class="brand-sub">
+            Learn • Practise • Drive
+          </small>
+        </span>
+
+      </div>
+
+      <p>
+        An independent Australian road-rule practice platform.
+        Always check the current official road authority information
+        for the rules and requirements applicable to your licence.
+      </p>
+
+    </div>
+
+    <div>
+
+      <strong>Important</strong>
+
+      <p>
+        Aussie Learner is not affiliated with or endorsed by
+        VicRoads or any Australian state or territory road authority.
+      </p>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+<script>
+/* ============================================================
+   AUSSIE LEARNER
+   SINGLE-FILE APPLICATION
+============================================================ */
+
+
+/* =========================
+   CONFIGURATION
+========================= */
+
+const TEST_CONFIG = {
+
+  CAR: {
+    name: "Car Practice Test",
+    questions: 10,
+    passPercentage: 78,
+    minutes: 30
+  },
+
+  MOTORCYCLE: {
+    name: "Motorcycle Practice Test",
+    questions: 10,
+    passPercentage: 78,
+    minutes: 30
+  },
+
+  PEDESTRIAN: {
+    name: "Pedestrian Practice Test",
+    questions: 10,
+    passPercentage: 70,
+    minutes: 20
+  },
+
+  BIKE: {
+    name: "Bike Practice Test",
+    questions: 10,
+    passPercentage: 70,
+    minutes: 20
+  },
+
+  MR: {
+    name: "MR Practice Test",
+    questions: 10,
+    passPercentage: 80,
+    minutes: 30
+  },
+
+  HR: {
+    name: "HR Practice Test",
+    questions: 10,
+    passPercentage: 80,
+    minutes: 30
+  },
+
+  HC: {
+    name: "HC Practice Test",
+    questions: 10,
+    passPercentage: 80,
+    minutes: 30
+  },
+
+  MC: {
+    name: "MC Practice Test",
+    questions: 10,
+    passPercentage: 80,
+    minutes: 30
+  }
+
+};
+
+
+/*
+  DEMONSTRATION QUESTION BANK.
+
+  IMPORTANT:
+  These are sample practice questions used to make
+  the application functional.
+
+  Before publishing as an official-looking test bank,
+  replace/verify questions against the current relevant
+  Australian state or territory authority.
+*/
+
+const QUESTION_BANK = [
+
+  {
+    id: "car-001",
+    state: "VIC",
+    category: "CAR",
+    topic: "Following Distance",
+    question:
+      "Why should you maintain a safe following distance?",
+    options: [
+      "To give yourself more time to react",
+      "To make your vehicle use more fuel",
+      "To prevent every traffic jam",
+      "So you never need to check mirrors"
+    ],
+    correct: 0
+  },
+
+  {
+    id: "car-002",
+    state: "VIC",
+    category: "CAR",
+    topic: "Observation",
+    question:
+      "Before moving from a parked position, what should you do?",
+    options: [
+      "Check your surroundings and make sure it is safe",
+      "Accelerate immediately",
+      "Only look straight ahead",
+      "Sound the horn continuously"
+    ],
+    correct: 0
+  },
+
+  {
+    id: "car-003",
+    state: "VIC",
+    category: "CAR",
+    topic: "Intersections",
+    question:
+      "When approaching an intersection, what should you do?",
+    options: [
+      "Check for hazards and follow the applicable give-way rules",
+      "Always accelerate",
+      "Ignore vehicles approaching from the side",
+      "Only look at the vehicle behind you"
+    ],
+    correct: 0
+  },
+
+  {
+    id: "car-004",
+    state: "VIC",
+    category: "CAR",
+    topic: "Road Safety",
+    question:
+      "What is one important purpose of checking your mirrors regularly?",
+    options: [
+      "To remain aware of surrounding traffic",
+      "To increase engine power",
+      "To avoid using indicators",
+      "To reduce tyre pressure"
+    ],
+    correct: 0
+  },
+
+  {
+    id: "car-005",
+    state: "VIC",
+    category: "Signs",
+    question:
+      "What is the purpose of road signs?",
+    options: [
+      "To communicate information, warnings and restrictions",
+      "To decorate the road",
+      "To replace all driver observation",
+      "To guarantee there are no hazards"
+    ],
+    correct: 0
+  },
+
+  {
+    id: "motorcycle-001",
+    state: "VIC",
+    category: "MOTORCYCLE",
+    topic: "Motorcycle Safety",
+    question:
+      "Why is visibility particularly important for motorcycle riders?",
+    options: [
+      "Other road users may have difficulty seeing motorcycles",
+      "Motorcycles are always larger than cars",
+      "It eliminates the need for signalling",
+      "It means mirrors are unnecessary"
+    ],
+    correct: 0
+  },
+
+  {
+    id: "motorcycle-002",
+    state: "VIC",
+    category: "MOTORCYCLE",
+    topic: "Hazards",
+    question:
+      "What should a rider do when approaching a potential hazard?",
+    options: [
+      "Reduce risk by adjusting speed and position as appropriate",
+      "Close their eyes",
+      "Accelerate without checking",
+      "Ignore the hazard"
+    ],
+    correct: 0
+  },
+
+  {
+    id: "bike-001",
+    state: "VIC",
+    category: "BIKE",
+    topic: "Bicycle Safety",
+    question:
+      "Before changing direction, what should a cyclist do?",
+    options: [
+      "Check the surroundings and signal when required",
+      "Move without checking",
+      "Only look down",
+      "Close their eyes"
+    ],
+    correct: 0
+  },
+
+  {
+    id: "pedestrian-001",
+    state: "VIC",
+    category: "PEDESTRIAN",
+    topic: "Pedestrian Safety",
+    question:
+      "What should a pedestrian do before crossing a road?",
+    options: [
+      "Check for approaching traffic and cross safely",
+      "Walk onto the road without looking",
+      "Assume every vehicle will stop",
+      "Look only at the pavement"
+    ],
+    correct: 0
+  },
+
+  {
+    id: "mr-001",
+    state: "VIC",
+    category: "MR",
+    topic: "Heavy Vehicles",
+    question:
+      "Why do heavy vehicles require additional awareness around them?",
+    options: [
+      "They can have larger blind spots and require more space",
+      "They are always smaller than cars",
+      "They never need to brake",
+      "They can stop instantly"
+    ],
+    correct: 0
+  },
+
+  {
+    id: "hr-001",
+    state: "VIC",
+    category: "HR",
+    topic: "Heavy Vehicles",
+    question:
+      "What should a heavy vehicle driver consider when manoeuvring?",
+    options: [
+      "Vehicle size, clearance and surrounding road users",
+      "Only the vehicle's radio",
+      "Nothing outside the cab",
+      "Only the speedometer"
+    ],
+    correct: 0
+  },
+
+  {
+    id: "hc-001",
+    state: "VIC",
+    category: "HC",
+    topic: "Combination Vehicles",
+    question:
+      "Why does a combination vehicle require additional space when manoeuvring?",
+    options: [
+      "Its overall length and turning characteristics",
+      "Because it has no steering",
+      "Because it is always travelling backwards",
+      "Because mirrors are not permitted"
+    ],
+    correct: 0
+  },
+
+  {
+    id: "mc-001",
+    state: "VIC",
+    category: "MC",
+    topic: "Multi Combination",
+    question:
+      "What is important when operating a multi-combination vehicle?",
+    options: [
+      "Understanding the vehicle's size, handling and road position",
+      "Ignoring other road users",
+      "Driving without mirrors",
+      "Never checking clearance"
+    ],
+    correct: 0
+  }
+
+];
+
+
+/* =========================
+   STATE
+========================= */
+
+let selectedState = "VIC";
+let selectedCategory = "CAR";
+
+let currentQuestions = [];
+let currentQuestionIndex = 0;
+
+let answers = {};
+
+let timerSeconds = 0;
+let timerInterval = null;
+
+
+/* =========================
+   ELEMENT HELPERS
+========================= */
+
+function $(id) {
+  return document.getElementById(id);
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function showHome() {
+
+  clearInterval(timerInterval);
+
+  $("homeScreen").classList.remove("hidden");
+  $("testScreen").classList.add("hidden");
+  $("resultsScreen").classList.add("hidden");
+  $("progressScreen").classList.add("hidden");
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+
+function scrollToTests() {
+
+  showHome();
+
+  setTimeout(() => {
+
+    $("testsSection").scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }, 50);
+}
+
+
+function scrollToStates() {
+
+  showHome();
+
+  setTimeout(() => {
+
+    $("statesSection").scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }, 50);
+}
+
+
+/* =========================
+   STATE SELECTION
+========================= */
+
+function selectState(button, state) {
+
+  document
+    .querySelectorAll(".state")
+    .forEach(el => el.classList.remove("selected"));
+
+  button.classList.add("selected");
+
+  selectedState = state;
+
+}
+
+
+/* =========================
+   LICENCE SELECTION
+========================= */
+
+function chooseLicence(category) {
+
+  selectedCategory = category;
+
+  /*
+    For this one-file version, the test starts after
+    the category is selected.
+
+    State is selected separately below the test cards.
+  */
+
+  startTest(category);
+}
+
+
+/* =========================
+   QUESTION PREPARATION
+========================= */
+
+function shuffle(array) {
+
+  const copy = [...array];
+
+  for (
+    let i = copy.length - 1;
+    i > 0;
+    i--
+  ) {
+
+    const j =
+      Math.floor(Math.random() * (i + 1));
+
+    [
+      copy[i],
+      copy[j]
+    ] = [
+      copy[j],
+      copy[i]
+    ];
+  }
+
+  return copy;
+}
+
+
+function buildQuestionSet(category) {
+
+  const eligible =
+    QUESTION_BANK.filter(question =>
+      question.category === category &&
+      (
+        question.state === selectedState ||
+        question.state === "ALL"
+      )
+    );
+
+  const config = TEST_CONFIG[category];
+
+  /*
+    If the question bank is smaller than the configured
+    number, use all available questions.
+
+    Once you add the complete verified bank, this will
+    automatically use the configured number.
+  */
+
+  return shuffle(eligible)
+    .slice(0, config.questions);
+}
+
+
+/* =========================
+   START TEST
+========================= */
+
+function startTest(category) {
+
+  selectedCategory = category;
+
+  const config =
+    TEST_CONFIG[category];
+
+  currentQuestions =
+    buildQuestionSet(category);
+
+  if (!currentQuestions.length) {
+
+    alert(
+      "There are currently no verified questions loaded for " +
+      category +
+      " in " +
+      selectedState +
+      ". Add the appropriate question bank before publishing this test."
+    );
+
+    return;
+  }
+
+  currentQuestionIndex = 0;
+
+  answers = {};
+
+  timerSeconds =
+    config.minutes * 60;
+
+  $("homeScreen").classList.add("hidden");
+  $("progressScreen").classList.add("hidden");
+  $("resultsScreen").classList.add("hidden");
+  $("testScreen").classList.remove("hidden");
+
+  $("testTitle").textContent =
+    selectedState +
+    " • " +
+    config.name;
+
+  startTimer();
+
+  renderQuestion();
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+
+/* =========================
+   TIMER
+========================= */
+
+function startTimer() {
+
+  clearInterval(timerInterval);
+
+  updateTimer();
+
+  timerInterval =
+    setInterval(() => {
+
+      timerSeconds--;
+
+      updateTimer();
+
+      if (timerSeconds <= 0) {
+
+        clearInterval(timerInterval);
+
+        finishTest();
+
+      }
+
+    }, 1000);
+}
+
+
+function updateTimer() {
+
+  const minutes =
+    Math.floor(timerSeconds / 60)
+      .toString()
+      .padStart(2, "0");
+
+  const seconds =
+    (timerSeconds % 60)
+      .toString()
+      .padStart(2, "0");
+
+  $("timer").textContent =
+    `${minutes}:${seconds}`;
+
+}
+
+
+/* =========================
+   RENDER QUESTION
+========================= */
+
+function renderQuestion() {
+
+  const question =
+    currentQuestions[currentQuestionIndex];
+
+  const total =
+    currentQuestions.length;
+
+  $("questionNumber").textContent =
+    `Question ${currentQuestionIndex + 1} / ${total}`;
+
+  $("questionTopic").textContent =
+    question.topic || "ROAD RULES";
+
+  $("questionText").textContent =
+    question.question;
+
+  const progress =
+    ((currentQuestionIndex + 1) / total) * 100;
+
+  $("testProgressBar").style.width =
+    `${progress}%`;
+
+  const answersContainer =
+    $("answers");
+
+  answersContainer.innerHTML = "";
+
+  question.options.forEach(
+    (option, index) => {
+
+      const button =
+        document.createElement("button");
+
+      button.className =
+        "answer";
+
+      if (
+        answers[question.id] === index
+      ) {
+        button.classList.add("selected");
+      }
+
+      button.innerHTML = `
+        <span class="answer-letter">
+          ${String.fromCharCode(65 + index)}
+        </span>
+
+        <span>
+          ${escapeHtml(option)}
+        </span>
+      `;
+
+      button.onclick =
+        () => selectAnswer(index);
+
+      answersContainer.appendChild(button);
+
+    }
+  );
+
+
+  $("previousButton").disabled =
+    currentQuestionIndex === 0;
+
+
+  const isLast =
+    currentQuestionIndex === total - 1;
+
+  const selected =
+    answers[question.id] !== undefined;
+
+  $("nextButton").disabled =
+    !selected;
+
+  $("nextButton").textContent =
+    isLast
+      ? "Finish Test ✓"
+      : "Next →";
+
+
+  /*
+    Re-trigger smooth slide animation.
+  */
+
+  const card =
+    $("questionCard");
+
+  card.style.animation = "none";
+
+  void card.offsetWidth;
+
+  card.style.animation =
+    "slideIn .35s ease";
+}
+
+
+/* =========================
+   SELECT ANSWER
+========================= */
+
+function selectAnswer(index) {
+
+  const question =
+    currentQuestions[currentQuestionIndex];
+
+  answers[question.id] =
+    index;
+
+  /*
+    IMPORTANT:
+    We intentionally do NOT reveal whether
+    the answer is correct here.
+  */
+
+  renderQuestion();
+}
+
+
+/* =========================
+   NEXT
+========================= */
+
+function nextQuestion() {
+
+  const question =
+    currentQuestions[currentQuestionIndex];
+
+  if (
+    answers[question.id] === undefined
+  ) {
+
+    return;
+  }
+
+  if (
+    currentQuestionIndex <
+    currentQuestions.length - 1
+  ) {
+
+    currentQuestionIndex++;
+
+    renderQuestion();
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  } else {
+
+    finishTest();
+
+  }
+}
+
+
+/* =========================
+   PREVIOUS
+========================= */
+
+function previousQuestion() {
+
+  if (
+    currentQuestionIndex > 0
+  ) {
+
+    currentQuestionIndex--;
+
+    renderQuestion();
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+}
+
+
+/* =========================
+   FINISH TEST
+========================= */
+
+function finishTest() {
+
+  clearInterval(timerInterval);
+
+  const config =
+    TEST_CONFIG[selectedCategory];
+
+  let correct = 0;
+
+  currentQuestions.forEach(
+    question => {
+
+      if (
+        answers[question.id] ===
+        question.correct
+      ) {
+
+        correct++;
+
+      }
+
+    }
+  );
+
+  const total =
+    currentQuestions.length;
+
+  const incorrect =
+    total - correct;
+
+  const percentage =
+    total === 0
+      ? 0
+      : Math.round(
+          (correct / total) * 100
+        );
+
+  /*
+    Use the configured percentage.
+    The required number is calculated rather than
+    hard-coded.
+  */
+
+  const required =
+    Math.ceil(
+      total *
+      (config.passPercentage / 100)
+    );
+
+  const passed =
+    correct >= required;
+
+
+  const result = {
+
+    date:
+      new Date().toISOString(),
+
+    state:
+      selectedState,
+
+    category:
+      selectedCategory,
+
+    total,
+
+    correct,
+
+    incorrect,
+
+    percentage,
+
+    required,
+
+    passed
+
+  };
+
+
+  saveResult(result);
+
+  showResults(result);
+}
+
+
+/* =========================
+   RESULTS
+========================= */
+
+function showResults(result) {
+
+  $("homeScreen").classList.add("hidden");
+  $("testScreen").classList.add("hidden");
+  $("progressScreen").classList.add("hidden");
+
+  $("resultsScreen").classList.remove("hidden");
+
+  $("resultScore").textContent =
+    `${result.percentage}%`;
+
+  $("resultIcon").textContent =
+    result.passed
+      ? "🏆"
+      : "📚";
+
+  $("resultStatus").textContent =
+    result.passed
+      ? "PASS"
+      : "KEEP PRACTISING";
+
+  $("resultStatus").className =
+    "result-status " +
+    (
+      result.passed
+        ? "pass"
+        : "fail"
+    );
+
+  $("resultDescription").textContent =
+    result.passed
+      ? `You achieved ${result.correct} correct answers.`
+      : `You achieved ${result.correct} correct answers. Keep practising the areas you found difficult.`;
+
+  $("totalResult").textContent =
+    result.total;
+
+  $("correctResult").textContent =
+    result.correct;
+
+  $("incorrectResult").textContent =
+    result.incorrect;
+
+  $("reportText").textContent =
+    `You answered ${result.correct} questions correctly and ${result.incorrect} incorrectly. Your final score was ${result.percentage}%.`;
+
+  $("resultProgress").style.width =
+    `${result.percentage}%`;
+
+  $("resultState").textContent =
+    result.state;
+
+  $("resultCategory").textContent =
+    result.category;
+
+  $("resultPassRequirement").textContent =
+    `${result.required} / ${result.total} (${TEST_CONFIG[result.category].passPercentage}%)`;
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+
+/* =========================
+   RESTART
+========================= */
+
+function restartTest() {
+
+  startTest(
+    selectedCategory
+  );
+}
+
+
+/* =========================
+   EXIT
+========================= */
+
+function exitTest() {
+
+  const confirmed =
+    confirm(
+      "Exit this test? Your current answers will be lost."
+    );
+
+  if (!confirmed) return;
+
+  clearInterval(timerInterval);
+
+  showHome();
+
+  scrollToTests();
+}
+
+
+/* =========================
+   LOCAL PROGRESS
+========================= */
+
+function saveResult(result) {
+
+  const key =
+    "aussieLearnerResults";
+
+  let history = [];
+
+  try {
+
+    history =
+      JSON.parse(
+        localStorage.getItem(key) || "[]"
+      );
+
+  } catch {
+
+    history = [];
+
+  }
+
+  history.unshift(result);
+
+  history =
+    history.slice(0, 50);
+
+  localStorage.setItem(
+    key,
+    JSON.stringify(history)
+  );
+}
+
+
+function getResults() {
+
+  try {
+
+    return JSON.parse(
+      localStorage.getItem(
+        "aussieLearnerResults"
+      ) || "[]"
+    );
+
+  } catch {
+
+    return [];
+
+  }
+
+}
+
+
+/* =========================
+   PROGRESS SCREEN
+========================= */
+
+function showProgress() {
+
+  $("homeScreen").classList.add("hidden");
+  $("testScreen").classList.add("hidden");
+  $("resultsScreen").classList.add("hidden");
+  $("progressScreen").classList.remove("hidden");
+
+  const results =
+    getResults();
+
+  const average =
+    results.length
+      ? Math.round(
+          results.reduce(
+            (sum, item) =>
+              sum + item.percentage,
+            0
+          ) / results.length
+        )
+      : 0;
+
+  $("progressAverage").textContent =
+    `${average}%`;
+
+  const history =
+    $("history");
+
+  history.innerHTML = "";
+
+  if (!results.length) {
+
+    history.innerHTML = `
+      <div
+        style="
+          color:#64748b;
+          padding:20px 0;
+        "
+      >
+        No completed tests yet.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  results.forEach(result => {
+
+    const row =
+      document.createElement("div");
+
+    row.className =
+      "history-row";
+
+    const date =
+      new Date(result.date)
+        .toLocaleDateString(
+          "en-AU"
+        );
+
+    row.innerHTML = `
+      <div>
+        <strong>
+          ${escapeHtml(result.state)}
+          •
+          ${escapeHtml(result.category)}
+        </strong>
+
+        <div
+          style="
+            color:#64748b;
+            font-size:12px;
+            margin-top:4px;
+          "
+        >
+          ${date}
+        </div>
+      </div>
+
+      <strong
+        style="
+          color:${result.passed ? "#16a34a" : "#ef4444"};
+        "
+      >
+        ${result.percentage}%
+      </strong>
+    `;
+
+    history.appendChild(row);
+
+  });
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHtml(value) {
+
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+/* =========================
+   INITIALISE
+========================= */
+
+showHome();
+
+</script>
+
+</body>
+</html>
