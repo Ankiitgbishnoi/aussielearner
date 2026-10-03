@@ -2,27 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#07111f">
-<meta name="description" content="Aussie Learner - Australian driving and road rule practice tests.">
-<title>Aussie Learner | Australian Road Rules Practice</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#06111f">
+<meta name="description" content="Aussie Learner — Australian road rules practice tests.">
+<title>Aussie Learner 🇦🇺</title>
 
 <style>
 :root{
-  --bg:#07111f;
-  --bg2:#0d1d31;
-  --card:rgba(15,30,49,.82);
-  --card2:rgba(21,42,67,.92);
-  --text:#f7fbff;
-  --muted:#a9bbce;
-  --blue:#27a9ff;
-  --blue2:#087fe5;
-  --green:#27d98b;
-  --red:#ff5f6d;
-  --yellow:#ffc857;
-  --border:rgba(255,255,255,.10);
-  --shadow:0 25px 70px rgba(0,0,0,.35);
-  --radius:24px;
+  --blue:#159cf4;
+  --blue2:#0875d1;
+  --green:#22d889;
+  --red:#ff5b68;
+  --dark:#06111f;
+  --dark2:#0b1b2c;
+  --card:rgba(7,18,31,.82);
+  --border:rgba(255,255,255,.12);
+  --muted:#a8b9ca;
+  --white:#fff;
+  --shadow:0 25px 70px rgba(0,0,0,.4);
 }
 
 *{
@@ -36,85 +33,139 @@ html{
 }
 
 body{
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  color:var(--text);
-  background:
-    radial-gradient(circle at 10% 20%,rgba(39,169,255,.16),transparent 28%),
-    radial-gradient(circle at 90% 15%,rgba(39,217,139,.12),transparent 25%),
-    linear-gradient(135deg,#06101c,#0a1829 45%,#07111f);
   min-height:100vh;
+  color:white;
+  background:#06111f;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
   overflow-x:hidden;
 }
 
-/* Australian city/night background */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-3;
-  opacity:.45;
-  background:
-    linear-gradient(to top,rgba(4,12,22,.98) 0%,rgba(4,12,22,.3) 55%,rgba(4,12,22,.7) 100%),
-    radial-gradient(ellipse at 20% 75%,#1675a5 0 2%,transparent 2.5%),
-    radial-gradient(ellipse at 30% 68%,#d26c30 0 2%,transparent 2.5%),
-    radial-gradient(ellipse at 55% 72%,#7c4cbd 0 2%,transparent 2.5%),
-    radial-gradient(ellipse at 75% 67%,#21a88a 0 2%,transparent 2.5%),
-    radial-gradient(ellipse at 90% 75%,#d19b42 0 2%,transparent 2.5%);
-  filter:blur(1px);
+/* =========================================================
+   HERO BACKGROUND
+   ========================================================= */
+
+.hero{
+  min-height:720px;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
 }
 
-body::after{
-  content:"";
-  position:fixed;
+.hero-background{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  background:#071321;
+}
+
+.hero-image{
+  position:absolute;
+  inset:-4%;
+  width:108%;
+  height:108%;
+  object-fit:cover;
+  opacity:0;
+  transform:scale(1.04);
+  transition:
+    opacity 1.4s ease,
+    transform 10s ease;
+  filter:saturate(1.08) contrast(1.04);
+}
+
+.hero-image.active{
+  opacity:1;
+  transform:scale(1.12);
+}
+
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(3,12,23,.94) 0%,
+      rgba(3,12,23,.74) 38%,
+      rgba(3,12,23,.25) 72%,
+      rgba(3,12,23,.58) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(2,9,17,.65) 0%,
+      transparent 38%,
+      rgba(2,9,17,.9) 100%
+    );
+}
+
+.hero-location{
+  position:absolute;
+  right:35px;
+  bottom:35px;
+  z-index:5;
+  padding:10px 15px;
+  border-radius:999px;
+  background:rgba(0,0,0,.38);
+  border:1px solid rgba(255,255,255,.18);
+  backdrop-filter:blur(12px);
+  font-size:12px;
+  color:#dceeff;
+  transition:opacity .5s ease;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header{
+  position:absolute;
+  top:0;
   left:0;
   right:0;
-  bottom:0;
-  height:180px;
-  z-index:-2;
-  background:
-    linear-gradient(170deg,transparent 48%,rgba(0,0,0,.8) 49%),
-    linear-gradient(190deg,transparent 50%,rgba(0,0,0,.85) 51%);
-}
-
-/* Header */
-.header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  backdrop-filter:blur(18px);
-  background:rgba(5,14,25,.72);
-  border-bottom:1px solid var(--border);
+  z-index:50;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  background:linear-gradient(
+    180deg,
+    rgba(2,10,18,.72),
+    rgba(2,10,18,.05)
+  );
 }
 
 .nav{
   width:min(1200px,calc(100% - 32px));
+  min-height:78px;
   margin:auto;
-  min-height:76px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:20px;
 }
 
 .brand{
   display:flex;
   align-items:center;
   gap:12px;
+  font-size:21px;
   font-weight:900;
-  font-size:20px;
-  letter-spacing:-.5px;
+  letter-spacing:-.6px;
 }
 
-.brand-badge{
-  width:44px;
+.flag{
+  width:47px;
   height:32px;
   border-radius:8px;
   overflow:hidden;
-  box-shadow:0 8px 25px rgba(0,0,0,.3);
-  flex:none;
+  box-shadow:0 8px 25px rgba(0,0,0,.4);
+  border:1px solid rgba(255,255,255,.22);
 }
 
-.brand-badge svg{
+.flag svg{
   width:100%;
   height:100%;
   display:block;
@@ -126,81 +177,96 @@ body::after{
   gap:10px;
 }
 
-.pill{
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.06);
-  color:var(--muted);
+.nav-pill{
   padding:9px 13px;
   border-radius:999px;
+  background:rgba(0,0,0,.25);
+  border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(10px);
+  color:#d9e8f6;
   font-size:12px;
 }
 
-/* Hero */
-.hero{
-  width:min(1200px,calc(100% - 32px));
-  margin:0 auto;
-  padding:72px 0 45px;
+/* =========================================================
+   HERO CONTENT
+   ========================================================= */
+
+.hero-content{
   position:relative;
+  z-index:10;
+  width:min(1200px,calc(100% - 32px));
+  margin:auto;
+  padding:170px 0 110px;
+  display:grid;
+  grid-template-columns:1fr .72fr;
+  align-items:center;
+  gap:60px;
 }
 
-.hero-grid{
-  display:grid;
-  grid-template-columns:1.15fr .85fr;
-  gap:45px;
-  align-items:center;
+.hero-copy{
+  max-width:700px;
 }
 
 .eyebrow{
   display:inline-flex;
   align-items:center;
   gap:8px;
-  color:#9bdcff;
-  background:rgba(39,169,255,.10);
-  border:1px solid rgba(39,169,255,.22);
   padding:9px 14px;
   border-radius:999px;
-  font-weight:700;
-  font-size:13px;
+  background:rgba(21,156,244,.13);
+  border:1px solid rgba(85,194,255,.28);
+  color:#9cddff;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.4px;
   margin-bottom:20px;
+  backdrop-filter:blur(10px);
 }
 
 .hero h1{
-  font-size:clamp(44px,7vw,82px);
-  line-height:.94;
+  font-size:clamp(48px,7vw,82px);
+  line-height:.95;
   letter-spacing:-4px;
-  max-width:760px;
+  font-weight:950;
 }
 
 .hero h1 span{
-  background:linear-gradient(100deg,#fff,#65c7ff,#28df99);
+  background:
+    linear-gradient(
+      100deg,
+      #fff 0%,
+      #7fd4ff 45%,
+      #35e5a1 100%
+    );
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
 }
 
-.hero p{
-  color:var(--muted);
+.hero-text{
+  max-width:630px;
+  margin:25px 0;
+  color:#d0dce8;
   font-size:18px;
   line-height:1.7;
-  max-width:650px;
-  margin:25px 0;
+  text-shadow:0 2px 12px rgba(0,0,0,.35);
 }
 
-.hero-actions{
+.hero-buttons{
   display:flex;
   flex-wrap:wrap;
   gap:12px;
 }
 
 .btn{
-  border:0;
-  border-radius:15px;
-  padding:14px 20px;
-  font-weight:800;
+  border:none;
   cursor:pointer;
-  transition:.2s ease;
-  color:white;
+  color:#fff;
+  padding:14px 20px;
+  border-radius:15px;
   font-size:14px;
+  font-weight:850;
+  transition:.2s ease;
 }
 
 .btn:hover{
@@ -208,153 +274,157 @@ body::after{
 }
 
 .btn-primary{
-  background:linear-gradient(135deg,var(--blue),var(--blue2));
-  box-shadow:0 14px 30px rgba(39,169,255,.25);
+  background:linear-gradient(
+    135deg,
+    var(--blue),
+    var(--blue2)
+  );
+  box-shadow:
+    0 15px 35px rgba(21,156,244,.28);
 }
 
 .btn-secondary{
-  background:rgba(255,255,255,.07);
-  border:1px solid var(--border);
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+  backdrop-filter:blur(10px);
 }
 
-.btn-danger{
-  background:linear-gradient(135deg,#ff6470,#e53d54);
-}
-
-/* Flag corner */
-.corner-flag{
-  position:absolute;
-  right:0;
-  top:25px;
-  width:86px;
-  height:62px;
-  border-radius:12px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.25);
-  box-shadow:0 15px 35px rgba(0,0,0,.35);
-  transform:rotate(3deg);
-  opacity:.95;
-}
-
-/* Australia skyline card */
-.hero-art{
-  min-height:400px;
-  border-radius:32px;
-  position:relative;
-  overflow:hidden;
-  border:1px solid var(--border);
-  background:
-    radial-gradient(circle at 75% 25%,rgba(255,205,100,.35),transparent 18%),
-    linear-gradient(160deg,#123b59,#081521 72%);
+/* right side glass panel */
+.hero-panel{
+  padding:28px;
+  border-radius:28px;
+  background:rgba(3,13,24,.55);
+  border:1px solid rgba(255,255,255,.13);
+  backdrop-filter:blur(18px);
   box-shadow:var(--shadow);
 }
 
-.hero-art::before{
-  content:"";
-  position:absolute;
-  inset:auto 0 0;
-  height:46%;
-  background:
-    linear-gradient(155deg,transparent 35%,#030912 36% 100%),
-    linear-gradient(25deg,transparent 47%,#06101b 48% 100%);
+.hero-panel h3{
+  font-size:22px;
+  margin-bottom:9px;
 }
 
-.city{
-  position:absolute;
-  bottom:24%;
-  width:100%;
-  height:48%;
+.hero-panel p{
+  color:#b8cad9;
+  line-height:1.6;
+  font-size:13px;
 }
 
-.building{
-  position:absolute;
-  bottom:0;
-  background:linear-gradient(180deg,#173653,#08131f);
-  border:1px solid rgba(255,255,255,.05);
+.hero-stat{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  margin-top:20px;
 }
 
-.b1{left:7%;width:10%;height:45%}
-.b2{left:18%;width:8%;height:75%}
-.b3{left:27%;width:14%;height:52%}
-.b4{left:43%;width:8%;height:92%}
-.b5{left:54%;width:12%;height:62%}
-.b6{left:68%;width:8%;height:82%}
-.b7{left:78%;width:14%;height:48%}
+.hero-stat div{
+  padding:15px 10px;
+  border-radius:15px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+  text-align:center;
+}
 
-.skyline-label{
+.hero-stat strong{
+  display:block;
+  font-size:20px;
+}
+
+.hero-stat span{
+  color:#91a8bd;
+  font-size:10px;
+}
+
+/* slider dots */
+.slider-dots{
   position:absolute;
-  left:30px;
-  bottom:30px;
-  right:30px;
+  z-index:10;
+  left:50%;
+  bottom:26px;
+  transform:translateX(-50%);
   display:flex;
-  justify-content:space-between;
-  align-items:end;
-  gap:15px;
+  gap:7px;
 }
 
-.skyline-label strong{
-  font-size:26px;
+.slider-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:rgba(255,255,255,.35);
+  transition:.3s;
 }
 
-.skyline-label small{
-  color:#9eb1c5;
+.slider-dot.active{
+  width:25px;
+  border-radius:99px;
+  background:#fff;
 }
 
-/* Main */
+/* =========================================================
+   MAIN
+   ========================================================= */
+
 .main{
   width:min(1200px,calc(100% - 32px));
   margin:0 auto 70px;
 }
 
-/* State selector */
+/* =========================================================
+   STATE
+   ========================================================= */
+
 .state-panel{
+  margin-top:30px;
+  padding:24px;
+  border-radius:24px;
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:24px;
   box-shadow:var(--shadow);
-  margin-bottom:30px;
 }
 
 .state-panel h2{
   font-size:22px;
-  margin-bottom:8px;
+  margin-bottom:7px;
 }
 
 .state-panel p{
   color:var(--muted);
-  margin-bottom:18px;
+  font-size:13px;
+  margin-bottom:17px;
 }
 
 .state-select{
   width:100%;
-  max-width:420px;
-  padding:15px 16px;
+  max-width:430px;
+  padding:15px;
   border-radius:14px;
-  background:#0a192b;
-  color:white;
   border:1px solid var(--border);
   outline:none;
-  font-size:15px;
+  background:#091a2b;
+  color:#fff;
+  font-size:14px;
 }
 
-/* Categories */
-.section-title{
+/* =========================================================
+   TEST CARDS
+   ========================================================= */
+
+.section-heading{
   display:flex;
   align-items:end;
   justify-content:space-between;
-  gap:15px;
-  margin:45px 0 20px;
+  gap:20px;
+  margin:48px 0 20px;
 }
 
-.section-title h2{
+.section-heading h2{
   font-size:30px;
   letter-spacing:-1px;
 }
 
-.section-title p{
+.section-heading p{
   color:var(--muted);
-  font-size:14px;
+  font-size:13px;
 }
 
 .cards{
@@ -364,35 +434,40 @@ body::after{
 }
 
 .test-card{
-  position:relative;
   overflow:hidden;
-  min-height:260px;
-  border:1px solid var(--border);
-  background:linear-gradient(145deg,rgba(21,42,67,.9),rgba(7,17,31,.9));
-  border-radius:22px;
   cursor:pointer;
+  min-height:265px;
+  border-radius:22px;
+  border:1px solid var(--border);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18,40,64,.95),
+      rgba(5,16,28,.95)
+    );
   transition:.25s ease;
 }
 
 .test-card:hover{
-  transform:translateY(-7px);
-  border-color:rgba(39,169,255,.5);
-  box-shadow:0 25px 50px rgba(0,0,0,.3);
+  transform:translateY(-6px);
+  border-color:rgba(21,156,244,.45);
+  box-shadow:0 25px 55px rgba(0,0,0,.3);
 }
 
 .card-art{
-  height:125px;
+  height:130px;
   background:
-    radial-gradient(circle at 75% 20%,rgba(255,255,255,.12),transparent 20%),
-    linear-gradient(145deg,#0d3651,#07111d);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+    radial-gradient(
+      circle at 70% 20%,
+      rgba(255,255,255,.12),
+      transparent 22%
+    ),
+    linear-gradient(145deg,#0d3754,#06111c);
 }
 
 .card-art svg{
-  width:86%;
-  height:90%;
+  width:100%;
+  height:100%;
 }
 
 .card-body{
@@ -400,78 +475,82 @@ body::after{
 }
 
 .card-body h3{
-  font-size:18px;
+  font-size:17px;
   margin-bottom:7px;
 }
 
 .card-body p{
-  color:var(--muted);
+  color:#98adbf;
+  line-height:1.45;
   font-size:12px;
-  line-height:1.5;
 }
 
 .card-meta{
-  display:flex;
-  justify-content:space-between;
   margin-top:12px;
-  color:#8ca6bd;
+  color:#7891a7;
   font-size:11px;
 }
 
 .card-meta b{
-  color:#65c7ff;
+  color:#71ceff;
 }
 
-/* Test screen */
+/* =========================================================
+   TEST SCREEN
+   ========================================================= */
+
 #testScreen{
   display:none;
-}
-
-.test-shell{
-  min-height:70vh;
+  min-height:100vh;
+  padding-top:100px;
 }
 
 .test-top{
+  width:min(1200px,calc(100% - 32px));
+  margin:0 auto 20px;
   display:flex;
   justify-content:space-between;
-  align-items:center;
   gap:15px;
-  margin-bottom:20px;
+  align-items:center;
 }
 
 .test-info{
   display:flex;
-  gap:10px;
+  gap:8px;
   flex-wrap:wrap;
+  justify-content:flex-end;
 }
 
 .test-chip{
   padding:8px 12px;
-  background:rgba(255,255,255,.06);
-  border:1px solid var(--border);
   border-radius:999px;
-  color:#c4d4e3;
-  font-size:12px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.05);
+  color:#b7c9da;
+  font-size:11px;
+}
+
+.test-main{
+  width:min(1200px,calc(100% - 32px));
+  margin:0 auto 70px;
 }
 
 .progress{
   height:7px;
-  background:rgba(255,255,255,.07);
-  border-radius:999px;
+  border-radius:99px;
   overflow:hidden;
+  background:rgba(255,255,255,.07);
   margin-bottom:25px;
 }
 
-.progress > div{
+.progress div{
   height:100%;
-  background:linear-gradient(90deg,var(--blue),var(--green));
-  border-radius:999px;
-  transition:width .45s ease;
-}
-
-.question-wrap{
-  position:relative;
-  overflow:hidden;
+  background:linear-gradient(
+    90deg,
+    var(--blue),
+    var(--green)
+  );
+  transition:.4s ease;
 }
 
 .question-card{
@@ -480,13 +559,13 @@ body::after{
   border-radius:28px;
   padding:35px;
   box-shadow:var(--shadow);
-  animation:slideIn .45s cubic-bezier(.2,.8,.2,1);
+  animation:questionIn .45s ease;
 }
 
-@keyframes slideIn{
+@keyframes questionIn{
   from{
     opacity:0;
-    transform:translateX(45px);
+    transform:translateX(35px);
   }
   to{
     opacity:1;
@@ -495,60 +574,58 @@ body::after{
 }
 
 .question-number{
-  color:#67caff;
-  font-weight:800;
-  font-size:13px;
+  color:#70ccff;
+  font-weight:850;
+  font-size:12px;
   margin-bottom:14px;
 }
 
 .question-card h2{
   font-size:clamp(23px,3vw,34px);
   line-height:1.25;
-  max-width:900px;
-  margin-bottom:28px;
+  margin-bottom:27px;
 }
 
 .answers{
   display:grid;
-  gap:12px;
+  gap:11px;
 }
 
 .answer{
-  width:100%;
   display:flex;
   align-items:center;
-  gap:15px;
+  gap:14px;
+  width:100%;
   padding:17px;
-  border:1px solid rgba(255,255,255,.09);
-  background:rgba(255,255,255,.035);
   color:white;
-  border-radius:16px;
-  text-align:left;
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:15px;
   cursor:pointer;
-  transition:.18s ease;
-  font-size:15px;
+  text-align:left;
+  transition:.18s;
 }
 
 .answer:hover{
-  background:rgba(39,169,255,.09);
-  border-color:rgba(39,169,255,.4);
   transform:translateX(3px);
+  border-color:rgba(21,156,244,.5);
+  background:rgba(21,156,244,.09);
 }
 
 .answer.selected{
-  background:rgba(39,169,255,.14);
   border-color:var(--blue);
+  background:rgba(21,156,244,.15);
 }
 
 .answer-letter{
   min-width:35px;
   width:35px;
   height:35px;
+  border-radius:10px;
   display:grid;
   place-items:center;
-  border-radius:10px;
-  background:#112941;
-  color:#8ed7ff;
+  background:#112b45;
+  color:#83d6ff;
   font-weight:900;
 }
 
@@ -559,7 +636,10 @@ body::after{
   margin-top:25px;
 }
 
-/* Result */
+/* =========================================================
+   RESULT
+   ========================================================= */
+
 .result{
   background:var(--card);
   border:1px solid var(--border);
@@ -570,20 +650,20 @@ body::after{
 }
 
 .result-icon{
-  width:85px;
-  height:85px;
-  margin:0 auto 20px;
+  width:82px;
+  height:82px;
+  margin:0 auto 18px;
   border-radius:50%;
   display:grid;
   place-items:center;
-  font-size:40px;
-  background:rgba(39,217,139,.12);
-  border:1px solid rgba(39,217,139,.3);
+  font-size:36px;
+  background:rgba(34,216,137,.12);
+  border:1px solid rgba(34,216,137,.3);
 }
 
 .result h2{
-  font-size:38px;
-  margin-bottom:10px;
+  font-size:37px;
+  margin-bottom:8px;
 }
 
 .result p{
@@ -591,21 +671,27 @@ body::after{
 }
 
 .score{
-  font-size:70px;
-  font-weight:900;
-  margin:20px 0;
-  background:linear-gradient(135deg,#fff,#58c9ff,#27d98b);
+  font-size:68px;
+  font-weight:950;
+  margin:18px 0;
+  background:
+    linear-gradient(
+      135deg,
+      #fff,
+      #60cbff,
+      #2de69c
+    );
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
 }
 
 .stats{
+  max-width:650px;
+  margin:28px auto;
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  max-width:650px;
-  margin:30px auto;
+  gap:10px;
 }
 
 .stat{
@@ -617,13 +703,13 @@ body::after{
 
 .stat strong{
   display:block;
-  font-size:26px;
-  margin-bottom:5px;
+  font-size:25px;
+  margin-bottom:4px;
 }
 
 .stat span{
-  color:var(--muted);
-  font-size:12px;
+  color:#91a8bd;
+  font-size:11px;
 }
 
 .pass{
@@ -634,32 +720,33 @@ body::after{
   color:var(--red);
 }
 
-/* Footer */
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
 footer{
   width:min(1200px,calc(100% - 32px));
-  margin:0 auto;
+  margin:auto;
   padding:35px 0 50px;
-  color:#70869b;
-  font-size:12px;
   border-top:1px solid var(--border);
+  color:#71869a;
+  font-size:11px;
+  line-height:1.6;
 }
 
-footer strong{
-  color:#b8cadb;
-}
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
 
-.hidden{
-  display:none!important;
-}
-
-/* Responsive */
 @media(max-width:950px){
-  .hero-grid{
+
+  .hero-content{
     grid-template-columns:1fr;
+    padding-top:145px;
   }
 
-  .hero-art{
-    min-height:300px;
+  .hero-panel{
+    max-width:600px;
   }
 
   .cards{
@@ -668,16 +755,22 @@ footer strong{
 }
 
 @media(max-width:620px){
-  .nav{
-    min-height:65px;
+
+  .hero{
+    min-height:800px;
   }
 
-  .nav-right .pill{
+  .nav{
+    min-height:68px;
+  }
+
+  .nav-right{
     display:none;
   }
 
-  .hero{
-    padding-top:45px;
+  .hero-content{
+    padding-top:125px;
+    gap:30px;
   }
 
   .hero h1{
@@ -685,35 +778,38 @@ footer strong{
     letter-spacing:-2.5px;
   }
 
-  .hero p{
+  .hero-text{
     font-size:15px;
   }
 
-  .corner-flag{
-    position:relative;
-    top:auto;
-    right:auto;
-    margin-bottom:20px;
+  .hero-panel{
+    padding:21px;
+  }
+
+  .hero-stat{
+    grid-template-columns:1fr;
+  }
+
+  .hero-location{
+    right:16px;
+    bottom:16px;
   }
 
   .cards{
     grid-template-columns:1fr;
   }
 
+  .section-heading{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
   .question-card{
     padding:23px;
   }
 
-  .question-card h2{
-    font-size:23px;
-  }
-
   .result{
     padding:28px 18px;
-  }
-
-  .score{
-    font-size:58px;
   }
 
   .stats{
@@ -730,393 +826,1086 @@ footer strong{
 
 <body>
 
-<header class="header">
-  <nav class="nav">
-    <div class="brand">
-      <div class="brand-badge">
-        <!-- Australian flag -->
-        <svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
-          <rect width="120" height="80" fill="#00008b"/>
-          <rect width="58" height="40" fill="#012169"/>
-          <path d="M0 0L58 40M58 0L0 40" stroke="#fff" stroke-width="9"/>
-          <path d="M0 0L58 40M58 0L0 40" stroke="#c8102e" stroke-width="4"/>
-          <path d="M29 0V40M0 20H58" stroke="#fff" stroke-width="14"/>
-          <path d="M29 0V40M0 20H58" stroke="#c8102e" stroke-width="7"/>
-          <circle cx="92" cy="22" r="5" fill="#fff"/>
-          <path d="M92 40l3 8 8 1-6 5 2 8-7-4-7 4 2-8-6-5 8-1z" fill="#fff"/>
-          <path d="M75 53l2 5 5 .5-4 3 1 5-4-3-5 3 1-5-4-3 5-.5z" fill="#fff"/>
-        </svg>
-      </div>
-      Aussie Learner
-    </div>
-
-    <div class="nav-right">
-      <span class="pill">🇦🇺 Australian Road Rules</span>
-      <span class="pill">100 Sets</span>
-    </div>
-  </nav>
-</header>
+<!-- =========================================================
+     HOME
+     ========================================================= -->
 
 <section id="homeScreen">
 
-  <section class="hero">
-    <div class="corner-flag">
-      <svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
-        <rect width="120" height="80" fill="#00008b"/>
-        <rect width="60" height="40" fill="#012169"/>
-        <path d="M0 0L60 40M60 0L0 40" stroke="#fff" stroke-width="10"/>
-        <path d="M0 0L60 40M60 0L0 40" stroke="#c8102e" stroke-width="4"/>
-        <path d="M30 0V40M0 20H60" stroke="#fff" stroke-width="14"/>
-        <path d="M30 0V40M0 20H60" stroke="#c8102e" stroke-width="7"/>
-        <circle cx="93" cy="20" r="5" fill="#fff"/>
-        <path d="M92 41l4 9 10 1-7 6 2 10-9-5-9 5 3-10-8-6 10-1z" fill="#fff"/>
-      </svg>
-    </div>
+<header class="header">
+<nav class="nav">
 
-    <div class="hero-grid">
-      <div>
-        <div class="eyebrow">🇦🇺 BUILT FOR AUSTRALIAN LEARNERS</div>
+<div class="brand">
 
-        <h1>
-          Learn the road.<br>
-          <span>Own the drive.</span>
-        </h1>
+<div class="flag">
+<svg viewBox="0 0 120 80">
+<rect width="120" height="80" fill="#00008b"/>
+<rect width="60" height="40" fill="#012169"/>
 
-        <p>
-          Practice Australian road rules with clean, realistic,
-          randomly generated tests. Choose your state, choose your
-          vehicle class and test yourself with a fresh set every time.
-        </p>
+<path
+d="M0 0L60 40M60 0L0 40"
+stroke="#fff"
+stroke-width="9"
+/>
 
-        <div class="hero-actions">
-          <button class="btn btn-primary" onclick="scrollToTests()">
-            Start a Practice Test →
-          </button>
-          <button class="btn btn-secondary" onclick="scrollToState()">
-            Choose Your State
-          </button>
-        </div>
-      </div>
+<path
+d="M0 0L60 40M60 0L0 40"
+stroke="#c8102e"
+stroke-width="4"
+/>
 
-      <div class="hero-art">
-        <div class="city">
-          <div class="building b1"></div>
-          <div class="building b2"></div>
-          <div class="building b3"></div>
-          <div class="building b4"></div>
-          <div class="building b5"></div>
-          <div class="building b6"></div>
-          <div class="building b7"></div>
-        </div>
+<path
+d="M30 0V40M0 20H60"
+stroke="#fff"
+stroke-width="14"
+/>
 
-        <svg viewBox="0 0 600 240" style="position:absolute;bottom:5px;left:0;width:100%;height:55%">
-          <defs>
-            <linearGradient id="road" x1="0" x2="1">
-              <stop offset="0" stop-color="#101a26"/>
-              <stop offset="1" stop-color="#273342"/>
-            </linearGradient>
-          </defs>
-          <path d="M0 220 Q170 145 340 190 T600 130 V240H0Z" fill="url(#road)"/>
-          <path d="M20 219 Q170 155 340 195 T600 137" fill="none" stroke="#f7d25c" stroke-width="5" stroke-dasharray="28 22"/>
+<path
+d="M30 0V40M0 20H60"
+stroke="#c8102e"
+stroke-width="7"
+/>
 
-          <!-- car -->
-          <g transform="translate(210 148)">
-            <path d="M20 50h170l-15-35-35-8-30-27H67L40 15 15 20Z" fill="#e8f4ff"/>
-            <path d="M70 15h35l25 22H52z" fill="#38a9e8"/>
-            <circle cx="58" cy="53" r="16" fill="#07111f"/>
-            <circle cx="155" cy="53" r="16" fill="#07111f"/>
-            <circle cx="58" cy="53" r="7" fill="#91a9bd"/>
-            <circle cx="155" cy="53" r="7" fill="#91a9bd"/>
-            <rect x="174" y="29" width="11" height="8" rx="3" fill="#ff5d63"/>
-          </g>
-        </svg>
+<circle cx="94" cy="20" r="5" fill="#fff"/>
 
-        <div class="skyline-label">
-          <div>
-            <strong>Australia</strong><br>
-            <small>Melbourne • Sydney • Brisbane • Perth • Adelaide</small>
-          </div>
-          <div>🇦🇺</div>
-        </div>
-      </div>
-    </div>
-  </section>
+<path
+d="M94 40l3 8 8 1-6 5 2 8-7-4-7 4 2-8-6-5 8-1z"
+fill="#fff"
+/>
+</svg>
+</div>
 
-  <main class="main">
+Aussie Learner
 
-    <section class="state-panel" id="statePanel">
-      <h2>Choose your state or territory</h2>
-      <p>
-        State selection helps you practise with the correct regional context.
-        Always verify current rules with your state or territory road authority.
-      </p>
+</div>
 
-      <select id="stateSelect" class="state-select">
-        <option value="VIC">Victoria (VIC)</option>
-        <option value="NSW">New South Wales (NSW)</option>
-        <option value="QLD">Queensland (QLD)</option>
-        <option value="WA">Western Australia (WA)</option>
-        <option value="SA">South Australia (SA)</option>
-        <option value="TAS">Tasmania (TAS)</option>
-        <option value="NT">Northern Territory (NT)</option>
-        <option value="ACT">Australian Capital Territory (ACT)</option>
-      </select>
-    </section>
+<div class="nav-right">
+<div class="nav-pill">🇦🇺 Australian Road Rules</div>
+<div class="nav-pill">Practice Tests</div>
+</div>
 
-    <section id="tests">
-      <div class="section-title">
-        <div>
-          <h2>Choose your test</h2>
-          <p>10 questions • 100 fresh sets • answers shuffled</p>
-        </div>
-      </div>
+</nav>
+</header>
 
-      <div class="cards">
 
-        <!-- Tourist -->
-        <article class="test-card" onclick="startTest('tourist')">
-          <div class="card-art">
-            <svg viewBox="0 0 400 180">
-              <rect width="400" height="180" fill="#0b2134"/>
-              <circle cx="310" cy="40" r="25" fill="#ffc857" opacity=".8"/>
-              <path d="M0 145 Q90 100 180 140 T400 110V180H0Z" fill="#173f4d"/>
-              <path d="M0 150L400 125" stroke="#f4cf62" stroke-width="5" stroke-dasharray="24 18"/>
-              <rect x="185" y="77" width="80" height="48" rx="7" fill="#e8f4ff"/>
-              <circle cx="203" cy="126" r="11" fill="#07111f"/>
-              <circle cx="245" cy="126" r="11" fill="#07111f"/>
-              <rect x="197" y="84" width="56" height="20" rx="4" fill="#55bde9"/>
-              <text x="25" y="40" fill="#9fdcff" font-size="20" font-weight="700">AUSTRALIA</text>
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>Tourist Traffic Rules</h3>
-            <p>Australian visitor essentials, signs, driving side, safety and road etiquette.</p>
-            <div class="card-meta"><span>100 Sets</span><b>10 Questions</b></div>
-          </div>
-        </article>
+<!-- =========================================================
+     AUSTRALIAN LANDMARK SLIDER
+     ========================================================= -->
 
-        <!-- Bike -->
-        <article class="test-card" onclick="startTest('bike')">
-          <div class="card-art">
-            <svg viewBox="0 0 400 180">
-              <rect width="400" height="180" fill="#0b2134"/>
-              <path d="M0 145H400V180H0Z" fill="#111b27"/>
-              <path d="M20 155H380" stroke="#f6d05e" stroke-width="4" stroke-dasharray="25 20"/>
-              <circle cx="150" cy="125" r="30" fill="none" stroke="#dce8f2" stroke-width="6"/>
-              <circle cx="245" cy="125" r="30" fill="none" stroke="#dce8f2" stroke-width="6"/>
-              <path d="M150 125l45-50 50 50M195 75l-20-15M195 75h25M195 75l-20 50M195 75l50 50" fill="none" stroke="#29b8ff" stroke-width="6"/>
-              <circle cx="195" cy="53" r="14" fill="#ffcb6b"/>
-              <path d="M194 68l-13 32 30 25" fill="none" stroke="#ffcb6b" stroke-width="7"/>
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>Bike / Motorcycle</h3>
-            <p>Motorcycle-focused safety, positioning, protective equipment and road rules.</p>
-            <div class="card-meta"><span>100 Sets</span><b>10 Questions</b></div>
-          </div>
-        </article>
+<section class="hero">
 
-        <!-- Car -->
-        <article class="test-card" onclick="startTest('car')">
-          <div class="card-art">
-            <svg viewBox="0 0 400 180">
-              <rect width="400" height="180" fill="#0b2134"/>
-              <path d="M0 140Q200 115 400 145V180H0Z" fill="#111a25"/>
-              <path d="M0 154H400" stroke="#f6d05e" stroke-width="4" stroke-dasharray="25 20"/>
-              <path d="M90 112h220l-18-40-50-15H160l-45 15-25 40z" fill="#ef5c63"/>
-              <path d="M150 62h65l35 33H125z" fill="#54bce9"/>
-              <circle cx="140" cy="116" r="20" fill="#07111f"/>
-              <circle cx="265" cy="116" r="20" fill="#07111f"/>
-              <circle cx="140" cy="116" r="8" fill="#a8bdcf"/>
-              <circle cx="265" cy="116" r="8" fill="#a8bdcf"/>
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>Car / Learner</h3>
-            <p>Everyday Australian driving rules, signs, intersections and safe driving.</p>
-            <div class="card-meta"><span>100 Sets</span><b>10 Questions</b></div>
-          </div>
-        </article>
+<div class="hero-background">
 
-        <!-- MR -->
-        <article class="test-card" onclick="startTest('mr')">
-          <div class="card-art">
-            <svg viewBox="0 0 400 180">
-              <rect width="400" height="180" fill="#0b2134"/>
-              <rect x="70" y="54" width="260" height="75" rx="8" fill="#ff9f43"/>
-              <rect x="95" y="70" width="55" height="28" fill="#62c5ed"/>
-              <rect x="165" y="70" width="55" height="28" fill="#62c5ed"/>
-              <rect x="235" y="70" width="55" height="28" fill="#62c5ed"/>
-              <circle cx="120" cy="133" r="18" fill="#07111f"/>
-              <circle cx="280" cy="133" r="18" fill="#07111f"/>
-              <path d="M0 150H400" stroke="#f6d05e" stroke-width="4" stroke-dasharray="25 20"/>
-              <text x="155" y="43" fill="#bfe8ff" font-size="18" font-weight="700">MR</text>
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>MR</h3>
-            <p>Medium rigid vehicle practice covering vehicle control and road rules.</p>
-            <div class="card-meta"><span>100 Sets</span><b>10 Questions</b></div>
-          </div>
-        </article>
+<!--
+  These are photographic image URLs.
+  They automatically rotate every 10 seconds.
+-->
 
-        <!-- HR -->
-        <article class="test-card" onclick="startTest('hr')">
-          <div class="card-art">
-            <svg viewBox="0 0 400 180">
-              <rect width="400" height="180" fill="#0b2134"/>
-              <rect x="35" y="50" width="330" height="78" rx="8" fill="#36b37e"/>
-              <rect x="55" y="67" width="60" height="28" fill="#61c7eb"/>
-              <rect x="130" y="67" width="60" height="28" fill="#61c7eb"/>
-              <rect x="205" y="67" width="60" height="28" fill="#61c7eb"/>
-              <rect x="280" y="67" width="60" height="28" fill="#61c7eb"/>
-              <circle cx="100" cy="132" r="18" fill="#07111f"/>
-              <circle cx="300" cy="132" r="18" fill="#07111f"/>
-              <path d="M0 150H400" stroke="#f6d05e" stroke-width="4" stroke-dasharray="25 20"/>
-              <text x="180" y="40" fill="#bfe8ff" font-size="18" font-weight="700">HR</text>
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>HR</h3>
-            <p>Heavy rigid vehicle concepts, safety, braking, stability and road rules.</p>
-            <div class="card-meta"><span>100 Sets</span><b>10 Questions</b></div>
-          </div>
-        </article>
+<img
+class="hero-image active"
+src="https://images.unsplash.com/photo-1524293581917-878a6d017c71?auto=format&fit=crop&w=2400&q=90"
+alt="Sydney Harbour"
+>
 
-        <!-- HC -->
-        <article class="test-card" onclick="startTest('hc')">
-          <div class="card-art">
-            <svg viewBox="0 0 400 180">
-              <rect width="400" height="180" fill="#0b2134"/>
-              <rect x="25" y="58" width="160" height="67" rx="8" fill="#2879d8"/>
-              <rect x="195" y="67" width="175" height="58" rx="8" fill="#f29f3d"/>
-              <rect x="50" y="75" width="45" height="24" fill="#61c7eb"/>
-              <circle cx="75" cy="130" r="17" fill="#07111f"/>
-              <circle cx="145" cy="130" r="17" fill="#07111f"/>
-              <circle cx="240" cy="130" r="17" fill="#07111f"/>
-              <circle cx="320" cy="130" r="17" fill="#07111f"/>
-              <path d="M0 150H400" stroke="#f6d05e" stroke-width="4" stroke-dasharray="25 20"/>
-              <text x="174" y="43" fill="#bfe8ff" font-size="18" font-weight="700">HC</text>
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>HC</h3>
-            <p>Heavy combination practice including combinations, safety and manoeuvring.</p>
-            <div class="card-meta"><span>100 Sets</span><b>10 Questions</b></div>
-          </div>
-        </article>
+<img
+class="hero-image"
+src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=2400&q=90"
+alt="Great Barrier Reef"
+>
 
-        <!-- MC ROAD TRAIN -->
-        <article class="test-card" onclick="startTest('mc')">
-          <div class="card-art">
-            <svg viewBox="0 0 400 180">
-              <rect width="400" height="180" fill="#0b2134"/>
+<img
+class="hero-image"
+src="https://images.unsplash.com/photo-1529108190281-9a4f33aee7d5?auto=format&fit=crop&w=2400&q=90"
+alt="Uluru Australia"
+>
 
-              <!-- road -->
-              <path d="M0 146H400V180H0Z" fill="#101924"/>
-              <path d="M0 158H400" stroke="#f6d05e" stroke-width="4" stroke-dasharray="25 20"/>
+<img
+class="hero-image"
+src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=2400&q=90"
+alt="Australian coast"
+>
 
-              <!-- road train cab -->
-              <rect x="35" y="65" width="90" height="60" rx="8" fill="#e44850"/>
-              <path d="M50 65h45l20 20H50z" fill="#56c6ed"/>
-              <circle cx="60" cy="130" r="15" fill="#07111f"/>
-              <circle cx="108" cy="130" r="15" fill="#07111f"/>
+<img
+class="hero-image"
+src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=2400&q=90"
+alt="Tasmania"
+>
 
-              <!-- trailer 1 -->
-              <rect x="135" y="72" width="90" height="53" rx="6" fill="#dce6ed"/>
-              <circle cx="157" cy="130" r="13" fill="#07111f"/>
-              <circle cx="204" cy="130" r="13" fill="#07111f"/>
+<div class="hero-overlay"></div>
 
-              <!-- trailer 2 -->
-              <rect x="235" y="78" width="82" height="47" rx="6" fill="#f0a33b"/>
-              <circle cx="255" cy="130" r="13" fill="#07111f"/>
-              <circle cx="298" cy="130" r="13" fill="#07111f"/>
+</div>
 
-              <!-- trailer 3 -->
-              <rect x="327" y="83" width="58" height="42" rx="5" fill="#4eb38a"/>
-              <circle cx="344" cy="130" r="11" fill="#07111f"/>
-              <circle cx="374" cy="130" r="11" fill="#07111f"/>
 
-              <text x="145" y="42" fill="#bfe8ff" font-size="18" font-weight="800">MC • ROAD TRAIN</text>
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>MC • Multi Combination</h3>
-            <p>Road-train style combinations, mass, stability, safety and heavy-vehicle rules.</p>
-            <div class="card-meta"><span>100 Sets</span><b>10 Questions</b></div>
-          </div>
-        </article>
+<div class="hero-content">
 
-      </div>
-    </section>
-  </main>
+<div class="hero-copy">
+
+<div class="eyebrow">
+🇦🇺 AUSTRALIAN LEARNER PRACTICE
+</div>
+
+<h1>
+Learn the road.<br>
+<span>Own the drive.</span>
+</h1>
+
+<p class="hero-text">
+Practice Australian road rules with realistic,
+randomised tests designed to help you prepare
+with confidence — wherever you are in Australia.
+</p>
+
+<div class="hero-buttons">
+
+<button
+class="btn btn-primary"
+onclick="scrollToTests()"
+>
+Start Practice Test →
+</button>
+
+<button
+class="btn btn-secondary"
+onclick="scrollToState()"
+>
+Choose Your State
+</button>
+
+</div>
+
+</div>
+
+
+<div class="hero-panel">
+
+<h3>Ready for the road?</h3>
+
+<p>
+Choose your state and vehicle category,
+then complete a fresh practice test.
+Your answers are scored only after you
+finish the entire test.
+</p>
+
+<div class="hero-stat">
+
+<div>
+<strong>10</strong>
+<span>Questions</span>
+</div>
+
+<div>
+<strong>4</strong>
+<span>Answer choices</span>
+</div>
+
+<div>
+<strong>✓</strong>
+<span>Final score</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div
+id="heroLocation"
+class="hero-location"
+>
+📍 Sydney Harbour, NSW
+</div>
+
+
+<div
+id="sliderDots"
+class="slider-dots"
+></div>
+
 </section>
 
-<!-- TEST SCREEN -->
-<section id="testScreen">
-  <main class="main test-shell">
 
-    <div class="test-top">
-      <div>
-        <button class="btn btn-secondary" onclick="confirmExit()">← Exit Test</button>
-      </div>
+<!-- =========================================================
+     MAIN
+     ========================================================= -->
 
-      <div class="test-info">
-        <span class="test-chip" id="testTypeChip">Test</span>
-        <span class="test-chip" id="stateChip">VIC</span>
-        <span class="test-chip">10 Questions</span>
-        <span class="test-chip" id="setChip">Set 1 / 100</span>
-      </div>
-    </div>
+<main class="main">
 
-    <div class="progress">
-      <div id="progressBar" style="width:10%"></div>
-    </div>
+<section
+class="state-panel"
+id="statePanel"
+>
 
-    <div id="questionArea"></div>
+<h2>Choose your state or territory</h2>
 
-  </main>
+<p>
+Select where you are practising. Road rules can differ
+between Australian jurisdictions, so always verify current
+rules with your official road authority.
+</p>
+
+<select
+id="stateSelect"
+class="state-select"
+>
+
+<option value="VIC">
+Victoria (VIC)
+</option>
+
+<option value="NSW">
+New South Wales (NSW)
+</option>
+
+<option value="QLD">
+Queensland (QLD)
+</option>
+
+<option value="WA">
+Western Australia (WA)
+</option>
+
+<option value="SA">
+South Australia (SA)
+</option>
+
+<option value="TAS">
+Tasmania (TAS)
+</option>
+
+<option value="NT">
+Northern Territory (NT)
+</option>
+
+<option value="ACT">
+Australian Capital Territory (ACT)
+</option>
+
+</select>
+
 </section>
+
+
+<section id="tests">
+
+<div class="section-heading">
+
+<div>
+<h2>Choose your test</h2>
+
+<p>
+Fresh questions • Randomised answers • Final score at the end
+</p>
+</div>
+
+</div>
+
+
+<div class="cards">
+
+
+<!-- TOURIST -->
+
+<article
+class="test-card"
+onclick="startTest('tourist')"
+>
+
+<div class="card-art">
+
+<svg viewBox="0 0 400 180">
+
+<rect width="400" height="180" fill="#0b2134"/>
+
+<circle
+cx="320"
+cy="40"
+r="28"
+fill="#ffc857"
+/>
+
+<path
+d="M0 150Q110 105 220 142T400 115V180H0Z"
+fill="#174658"
+/>
+
+<path
+d="M0 157H400"
+stroke="#f4d263"
+stroke-width="5"
+stroke-dasharray="24 18"
+/>
+
+<rect
+x="155"
+y="87"
+width="105"
+height="50"
+rx="8"
+fill="#edf6fc"
+/>
+
+<path
+d="M175 87h50l24 25h-90z"
+fill="#4bb9e9"
+/>
+
+<circle
+cx="180"
+cy="139"
+r="13"
+fill="#07111f"
+/>
+
+<circle
+cx="237"
+cy="139"
+r="13"
+fill="#07111f"
+/>
+
+<text
+x="25"
+y="38"
+fill="#9cddff"
+font-size="19"
+font-weight="800"
+>
+AUSTRALIA
+</text>
+
+</svg>
+
+</div>
+
+<div class="card-body">
+
+<h3>
+Australian Tourist Rules
+</h3>
+
+<p>
+Visitor driving essentials, signs,
+road safety and Australian traffic rules.
+</p>
+
+<div class="card-meta">
+Practice Test
+</div>
+
+</div>
+
+</article>
+
+
+<!-- BIKE -->
+
+<article
+class="test-card"
+onclick="startTest('bike')"
+>
+
+<div class="card-art">
+
+<svg viewBox="0 0 400 180">
+
+<rect width="400" height="180" fill="#0b2134"/>
+
+<path
+d="M0 150H400"
+stroke="#f4d263"
+stroke-width="5"
+stroke-dasharray="24 18"
+/>
+
+<circle
+cx="135"
+cy="125"
+r="28"
+fill="none"
+stroke="#dce9f4"
+stroke-width="6"
+/>
+
+<circle
+cx="250"
+cy="125"
+r="28"
+fill="none"
+stroke="#dce9f4"
+stroke-width="6"
+/>
+
+<path
+d="M135 125l50-50 65 50M185 75h25M185 75l-18-16M185 75l-20 50"
+fill="none"
+stroke="#25b7ff"
+stroke-width="6"
+/>
+
+<circle
+cx="185"
+cy="55"
+r="13"
+fill="#ffc966"
+/>
+
+</svg>
+
+</div>
+
+<div class="card-body">
+
+<h3>Bike / Motorcycle</h3>
+
+<p>
+Motorcycle safety, positioning,
+equipment and road rules.
+</p>
+
+<div class="card-meta">
+Practice Test
+</div>
+
+</div>
+
+</article>
+
+
+<!-- CAR -->
+
+<article
+class="test-card"
+onclick="startTest('car')"
+>
+
+<div class="card-art">
+
+<svg viewBox="0 0 400 180">
+
+<rect width="400" height="180" fill="#0b2134"/>
+
+<path
+d="M0 150H400"
+stroke="#f4d263"
+stroke-width="5"
+stroke-dasharray="24 18"
+/>
+
+<path
+d="M90 120h220l-18-42-50-15H160l-45 15-25 42z"
+fill="#e95561"
+/>
+
+<path
+d="M150 63h65l35 32H125z"
+fill="#52bde8"
+/>
+
+<circle
+cx="140"
+cy="123"
+r="20"
+fill="#07111f"
+/>
+
+<circle
+cx="265"
+cy="123"
+r="20"
+fill="#07111f"
+/>
+
+</svg>
+
+</div>
+
+<div class="card-body">
+
+<h3>Car / Learner</h3>
+
+<p>
+Everyday driving, intersections,
+signs and safe road behaviour.
+</p>
+
+<div class="card-meta">
+Practice Test
+</div>
+
+</div>
+
+</article>
+
+
+<!-- MR -->
+
+<article
+class="test-card"
+onclick="startTest('mr')"
+>
+
+<div class="card-art">
+
+<svg viewBox="0 0 400 180">
+
+<rect width="400" height="180" fill="#0b2134"/>
+
+<rect
+x="55"
+y="55"
+width="290"
+height="72"
+rx="8"
+fill="#f39a3d"
+/>
+
+<rect
+x="80"
+y="70"
+width="55"
+height="28"
+fill="#5bc2e9"
+/>
+
+<rect
+x="150"
+y="70"
+width="55"
+height="28"
+fill="#5bc2e9"
+/>
+
+<rect
+x="220"
+y="70"
+width="55"
+height="28"
+fill="#5bc2e9"
+/>
+
+<circle cx="105" cy="130" r="18" fill="#07111f"/>
+<circle cx="295" cy="130" r="18" fill="#07111f"/>
+
+<text
+x="178"
+y="42"
+fill="#bde9ff"
+font-size="18"
+font-weight="800"
+>
+MR
+</text>
+
+</svg>
+
+</div>
+
+<div class="card-body">
+
+<h3>MR</h3>
+
+<p>
+Medium rigid vehicle practice,
+control, braking and safety.
+</p>
+
+<div class="card-meta">
+Practice Test
+</div>
+
+</div>
+
+</article>
+
+
+<!-- HR -->
+
+<article
+class="test-card"
+onclick="startTest('hr')"
+>
+
+<div class="card-art">
+
+<svg viewBox="0 0 400 180">
+
+<rect width="400" height="180" fill="#0b2134"/>
+
+<rect
+x="35"
+y="55"
+width="330"
+height="72"
+rx="8"
+fill="#31b27b"
+/>
+
+<rect x="58" y="70" width="55" height="28" fill="#61c8ed"/>
+<rect x="130" y="70" width="55" height="28" fill="#61c8ed"/>
+<rect x="202" y="70" width="55" height="28" fill="#61c8ed"/>
+<rect x="274" y="70" width="55" height="28" fill="#61c8ed"/>
+
+<circle cx="100" cy="130" r="18" fill="#07111f"/>
+<circle cx="300" cy="130" r="18" fill="#07111f"/>
+
+<text
+x="178"
+y="42"
+fill="#bde9ff"
+font-size="18"
+font-weight="800"
+>
+HR
+</text>
+
+</svg>
+
+</div>
+
+<div class="card-body">
+
+<h3>HR</h3>
+
+<p>
+Heavy rigid vehicle rules,
+stability, braking and safety.
+</p>
+
+<div class="card-meta">
+Practice Test
+</div>
+
+</div>
+
+</article>
+
+
+<!-- HC -->
+
+<article
+class="test-card"
+onclick="startTest('hc')"
+>
+
+<div class="card-art">
+
+<svg viewBox="0 0 400 180">
+
+<rect width="400" height="180" fill="#0b2134"/>
+
+<rect
+x="25"
+y="60"
+width="155"
+height="65"
+rx="8"
+fill="#287ad7"
+/>
+
+<rect
+x="190"
+y="68"
+width="175"
+height="57"
+rx="8"
+fill="#f29d3b"
+/>
+
+<circle cx="70" cy="130" r="17" fill="#07111f"/>
+<circle cx="135" cy="130" r="17" fill="#07111f"/>
+<circle cx="240" cy="130" r="17" fill="#07111f"/>
+<circle cx="320" cy="130" r="17" fill="#07111f"/>
+
+<text
+x="178"
+y="42"
+fill="#bde9ff"
+font-size="18"
+font-weight="800"
+>
+HC
+</text>
+
+</svg>
+
+</div>
+
+<div class="card-body">
+
+<h3>HC</h3>
+
+<p>
+Heavy combination vehicle rules,
+turning, stability and safety.
+</p>
+
+<div class="card-meta">
+Practice Test
+</div>
+
+</div>
+
+</article>
+
+
+<!-- MC ROAD TRAIN -->
+
+<article
+class="test-card"
+onclick="startTest('mc')"
+>
+
+<div class="card-art">
+
+<svg viewBox="0 0 400 180">
+
+<rect width="400" height="180" fill="#0b2134"/>
+
+<!-- road -->
+<rect
+x="0"
+y="148"
+width="400"
+height="32"
+fill="#101923"
+/>
+
+<path
+d="M0 158H400"
+stroke="#f4d263"
+stroke-width="5"
+stroke-dasharray="24 18"
+/>
+
+<!-- CAB -->
+
+<rect
+x="20"
+y="65"
+width="90"
+height="65"
+rx="7"
+fill="#df4750"
+/>
+
+<path
+d="M35 65h47l20 22H35z"
+fill="#56c5eb"
+/>
+
+<circle cx="48" cy="132" r="15" fill="#07111f"/>
+<circle cx="95" cy="132" r="15" fill="#07111f"/>
+
+<!-- TRAILER 1 -->
+
+<rect
+x="118"
+y="72"
+width="90"
+height="58"
+rx="5"
+fill="#dce7ed"
+/>
+
+<circle cx="140" cy="132" r="13" fill="#07111f"/>
+<circle cx="188" cy="132" r="13" fill="#07111f"/>
+
+<!-- TRAILER 2 -->
+
+<rect
+x="215"
+y="78"
+width="88"
+height="52"
+rx="5"
+fill="#efa03a"
+/>
+
+<circle cx="237" cy="132" r="13" fill="#07111f"/>
+<circle cx="281" cy="132" r="13" fill="#07111f"/>
+
+<!-- TRAILER 3 -->
+
+<rect
+x="309"
+y="84"
+width="65"
+height="46"
+rx="5"
+fill="#48af86"
+/>
+
+<circle cx="326" cy="132" r="11" fill="#07111f"/>
+<circle cx="357" cy="132" r="11" fill="#07111f"/>
+
+<text
+x="135"
+y="43"
+fill="#bde9ff"
+font-size="17"
+font-weight="900"
+>
+MC • ROAD TRAIN
+</text>
+
+</svg>
+
+</div>
+
+<div class="card-body">
+
+<h3>MC • Multi Combination</h3>
+
+<p>
+Road train combinations, safety,
+turning, braking and control.
+</p>
+
+<div class="card-meta">
+Practice Test
+</div>
+
+</div>
+
+</article>
+
+
+</div>
+</section>
+
+</main>
 
 <footer>
-  <strong>Aussie Learner</strong> — independent educational practice tool.
-  Not affiliated with VicRoads, Transport for NSW, TMR Queensland,
-  Main Roads WA, DIT SA, Service Tasmania, NT Government or Access Canberra.
-  Road rules can change. Always check the official road authority for your state or territory.
+
+<strong>Aussie Learner</strong> —
+independent educational practice tool.
+
+Road rules can change. Always check your
+official state or territory road authority
+for current requirements.
+
 </footer>
+
+</section>
+
+
+<!-- =========================================================
+     TEST SCREEN
+     ========================================================= -->
+
+<section id="testScreen">
+
+<div class="test-top">
+
+<button
+class="btn btn-secondary"
+onclick="confirmExit()"
+>
+← Exit Test
+</button>
+
+<div class="test-info">
+
+<span
+class="test-chip"
+id="testTypeChip"
+>
+Test
+</span>
+
+<span
+class="test-chip"
+id="stateChip"
+>
+VIC
+</span>
+
+<span class="test-chip">
+10 Questions
+</span>
+
+<span
+class="test-chip"
+id="setChip"
+>
+Set
+</span>
+
+</div>
+
+</div>
+
+
+<div class="test-main">
+
+<div class="progress">
+
+<div
+id="progressBar"
+style="width:10%"
+></div>
+
+</div>
+
+<div id="questionArea"></div>
+
+</div>
+
+</section>
+
 
 <script>
 "use strict";
 
-/*
-  ============================================================
-  AUSSIE LEARNER — SINGLE FILE APP
-  ============================================================
-
-  - 10 questions per test
-  - 100 test sets per category
-  - Questions and answers randomised
-  - Results only shown after final question
-  - State selection
-  - No external JS libraries
-  - Works as a standalone index.html
-*/
-
-// ------------------------------------------------------------
-// CONFIG
-// ------------------------------------------------------------
+/* ============================================================
+   CONFIG
+   ============================================================ */
 
 const QUESTIONS_PER_TEST = 10;
 const TOTAL_SETS = 100;
-
-// 8/10 = 80% for this custom 10-question practice format.
-// VicRoads' official learner practice test currently uses
-// 32 questions and a 78% pass mark.
 const PRACTICE_PASS = 8;
 
-// ------------------------------------------------------------
-// QUESTION BANK
-// ------------------------------------------------------------
+
+/* ============================================================
+   LANDMARK SLIDER
+   ============================================================ */
+
+const landmarks = [
+  {
+    name:"Sydney Harbour, NSW",
+    image:"https://images.unsplash.com/photo-1524293581917-878a6d017c71?auto=format&fit=crop&w=2400&q=90"
+  },
+  {
+    name:"Great Barrier Reef, QLD",
+    image:"https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=2400&q=90"
+  },
+  {
+    name:"Uluru, NT",
+    image:"https://images.unsplash.com/photo-1529108190281-9a4f33aee7d5?auto=format&fit=crop&w=2400&q=90"
+  },
+  {
+    name:"Great Ocean Road, VIC",
+    image:"https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=2400&q=90"
+  },
+  {
+    name:"Tasmania",
+    image:"https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=2400&q=90"
+  },
+  {
+    name:"Perth & Western Australia",
+    image:"https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2400&q=90"
+  },
+  {
+    name:"Brisbane & Queensland",
+    image:"https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=2400&q=90"
+  },
+  {
+    name:"Canberra, ACT",
+    image:"https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=2400&q=90"
+  }
+];
+
+let landmarkIndex = 0;
+
+const heroImages =
+  document.querySelectorAll(".hero-image");
+
+const locationLabel =
+  document.getElementById("heroLocation");
+
+const dotsContainer =
+  document.getElementById("sliderDots");
+
+
+/* create dots */
+
+landmarks.forEach((place,index)=>{
+
+  const dot =
+    document.createElement("div");
+
+  dot.className =
+    "slider-dot" +
+    (index === 0 ? " active" : "");
+
+  dotsContainer.appendChild(dot);
+});
+
+
+function showLandmark(index){
+
+  heroImages.forEach((image,i)=>{
+    image.classList.toggle(
+      "active",
+      i === index
+    );
+  });
+
+  document
+    .querySelectorAll(".slider-dot")
+    .forEach((dot,i)=>{
+
+      dot.classList.toggle(
+        "active",
+        i === index
+      );
+
+    });
+
+  locationLabel.style.opacity = "0";
+
+  setTimeout(()=>{
+
+    locationLabel.textContent =
+      "📍 " + landmarks[index].name;
+
+    locationLabel.style.opacity = "1";
+
+  },300);
+}
+
+
+function nextLandmark(){
+
+  landmarkIndex =
+    (landmarkIndex + 1) %
+    landmarks.length;
+
+  showLandmark(landmarkIndex);
+}
+
+
+/*
+  CHANGE IMAGE EVERY 10 SECONDS
+*/
+
+setInterval(
+  nextLandmark,
+  10000
+);
+
+
+/* ============================================================
+   PRELOAD LANDMARK IMAGES
+   ============================================================ */
+
+landmarks.forEach(place=>{
+
+  const img =
+    new Image();
+
+  img.src =
+    place.image;
+
+});
+
+
+/* ============================================================
+   QUESTIONS
+   ============================================================ */
 
 const COMMON = [
 
@@ -1139,78 +1928,61 @@ c:0
 },
 
 {
-q:"What is a safe response when visibility is poor?",
-a:["Reduce speed and increase caution","Drive faster to leave the area","Turn off headlights","Follow the vehicle ahead closely"],
+q:"What should you do when visibility is poor?",
+a:["Reduce speed and increase caution","Drive faster","Turn off headlights","Follow closely"],
 c:0
 },
 
 {
 q:"What should you do if you become tired while driving?",
-a:["Stop somewhere safe and rest","Open a window and continue regardless","Drive faster","Ignore the fatigue"],
+a:["Stop somewhere safe and rest","Drive faster","Open the window and ignore it","Keep going"],
 c:0
 },
 
 {
 q:"Why should you leave a safe following distance?",
-a:["It gives you more time to react and stop","It saves fuel automatically","It lets other cars pass illegally","It prevents all accidents"],
+a:["It gives you more time to react and stop","It saves fuel automatically","It prevents overtaking","It guarantees safety"],
 c:0
 },
 
 {
-q:"What should you do before changing lanes?",
-a:["Check mirrors, blind spots and signal appropriately","Only check the rear-view mirror","Accelerate without checking","Honk and move immediately"],
-c:0
-},
-
-{
-q:"What does a solid line on the road generally indicate?",
-a:["A restriction may apply to crossing it","You must always accelerate","It is a parking lane","It means overtaking is mandatory"],
+q:"Before changing lanes you should:",
+a:["Check mirrors, blind spots and signal appropriately","Only check the rear-view mirror","Accelerate immediately","Sound the horn"],
 c:0
 },
 
 {
 q:"What should you do at a STOP sign?",
-a:["Come to a complete stop and proceed only when safe","Slow slightly and continue","Stop only if another vehicle is visible","Sound the horn"],
+a:["Come to a complete stop and proceed when safe","Slow slightly","Stop only when another car appears","Sound the horn"],
 c:0
 },
 
 {
 q:"What is the safest approach near children or vulnerable road users?",
-a:["Slow down and be prepared to stop","Maintain speed","Use the horn continuously","Move closer to them"],
+a:["Slow down and be prepared to stop","Maintain speed","Sound the horn continuously","Move closer"],
 c:0
 },
 
 {
 q:"What should you do if an emergency vehicle approaches using warning devices?",
-a:["Take appropriate action to allow it to pass safely","Race ahead of it","Block the lane","Ignore it"],
-c:0
-},
-
-{
-q:"What should you do before opening your vehicle door beside traffic?",
-a:["Check for approaching road users, including cyclists","Open it immediately","Only check the mirror once a week","Sound the horn"],
+a:["Take appropriate action to allow it to pass safely","Race ahead","Block the lane","Ignore it"],
 c:0
 },
 
 {
 q:"Why is mobile phone use while driving dangerous?",
-a:["It can distract you from the road and traffic","It improves reaction time","It helps you maintain lane position","It makes braking easier"],
+a:["It can distract you from the road and traffic","It improves reaction time","It improves lane control","It makes braking easier"],
 c:0
 },
 
 {
-q:"What should you do if a road sign conflicts with your preferred route?",
-a:["Follow the applicable traffic control and road rules","Ignore it","Follow another driver's decision","Drive on the shoulder"],
-c:0
-},
-
-{
-q:"When driving at night, you should generally:",
-a:["Drive at a speed appropriate for your visibility and conditions","Drive faster because traffic is lighter","Use no lights","Follow very closely"],
+q:"When driving at night you should generally:",
+a:["Drive at a speed appropriate for visibility and conditions","Drive faster","Use no lights","Follow closely"],
 c:0
 }
 
 ];
+
 
 const TOURIST = [
 
@@ -1222,215 +1994,220 @@ c:0
 
 {
 q:"Before driving in a new Australian state or territory, a visitor should:",
-a:["Check the current local road rules","Assume every rule is identical","Ignore signs","Copy another driver's behaviour"],
+a:["Check the current local road rules","Assume every rule is identical","Ignore signs","Copy another driver"],
 c:0
 },
 
 {
 q:"If you are unfamiliar with a road sign, the safest approach is to:",
-a:["Slow down and identify the sign before proceeding","Accelerate","Ignore it","Follow the car ahead without checking"],
-c:0
-},
-
-{
-q:"A tourist driving in Australia should carry:",
-a:["The documents and licence required for their circumstances","No licence information","Only a passport","Only hotel details"],
-c:0
-},
-
-{
-q:"What should visitors remember about Australian road conditions?",
-a:["Conditions can vary greatly between urban, rural and remote areas","All roads are identical","Remote roads always have heavy traffic","Weather never affects driving"],
+a:["Slow down and identify the sign before proceeding","Accelerate","Ignore it","Follow the car ahead"],
 c:0
 },
 
 {
 q:"On an unfamiliar rural road, the safest choice is to:",
-a:["Adjust speed to road, weather and visibility conditions","Drive at maximum speed","Follow the vehicle ahead closely","Use the shoulder"],
+a:["Adjust speed to road, weather and visibility conditions","Drive at maximum speed","Follow closely","Use the shoulder"],
 c:0
 },
 
 {
 q:"If you miss a turn while using navigation, you should:",
-a:["Continue safely and follow the next safe route","Reverse suddenly","Make a dangerous U-turn anywhere","Stop in the traffic lane"],
+a:["Continue safely and follow the next safe route","Reverse suddenly","Make a dangerous U-turn","Stop in the traffic lane"],
 c:0
 },
 
 {
-q:"When driving in Australia, speed limits:",
-a:["Must be obeyed and can vary by road and location","Are only suggestions","Apply only to tourists","Can be ignored at night"],
-c:0
-},
-
-{
-q:"A visitor should be particularly careful when driving on unfamiliar roads because:",
-a:["Local road layouts and conditions may be unfamiliar","Australian roads never have hazards","Signs are optional","Traffic always travels slowly"],
+q:"Australian speed limits:",
+a:["Must be obeyed and can vary by road and location","Are suggestions","Apply only to tourists","Can be ignored at night"],
 c:0
 },
 
 {
 q:"Before beginning a long Australian road trip, it is sensible to:",
-a:["Plan fuel, rest stops, weather and road conditions","Drive continuously without breaks","Avoid checking weather","Carry no water"],
+a:["Plan fuel, rest stops, weather and road conditions","Drive continuously","Avoid weather information","Carry no water"],
+c:0
+},
+
+{
+q:"A tourist should take extra care on unfamiliar roads because:",
+a:["Local road layouts and conditions may be unfamiliar","Australian roads have no hazards","Signs are optional","Traffic always travels slowly"],
+c:0
+},
+
+{
+q:"When driving remotely in Australia, preparation is important because:",
+a:["Distances, weather and services can vary greatly","Every location has frequent services","Fuel is always available","Roads are identical"],
+c:0
+},
+
+{
+q:"When arriving in a new Australian city, a safe driver should:",
+a:["Pay attention to signs, lane markings and local traffic conditions","Ignore lane markings","Follow other cars blindly","Drive immediately at maximum speed"],
 c:0
 }
 
 ];
 
+
 const BIKE = [
 
 {
 q:"A motorcycle rider should wear an approved helmet that is:",
-a:["Properly fitted and securely fastened","Loose and unfastened","Only required on highways","Optional at low speed"],
+a:["Properly fitted and securely fastened","Loose","Optional","Unfastened"],
 c:0
 },
 
 {
 q:"Motorcycle riders should position themselves:",
-a:["Where they have a good view and can maintain a safe position","Always directly beside another vehicle","On the road shoulder","On the centre line"],
+a:["Where they have a good view and can maintain a safe position","On the road shoulder","On the centre line","Beside another vehicle"],
 c:0
 },
 
 {
-q:"A motorcycle's stopping distance can be affected by:",
+q:"Motorcycle stopping distance can be affected by:",
 a:["Speed, road surface, weather and rider response","Only engine size","Only helmet colour","Only traffic lights"],
 c:0
 },
 
 {
 q:"Before changing motorcycle lanes, a rider should:",
-a:["Check mirrors and blind spots and signal appropriately","Only look forward","Accelerate without checking","Sound the horn only"],
+a:["Check mirrors and blind spots and signal appropriately","Only look forward","Accelerate","Sound the horn"],
 c:0
 },
 
 {
 q:"Wet roads can make motorcycle riding:",
-a:["More hazardous by reducing available grip","Always safer","Exactly the same","Impossible in every case"],
+a:["More hazardous by reducing available grip","Always safer","Exactly the same","Impossible"],
 c:0
 },
 
 {
 q:"A rider should maintain a safe following distance because:",
-a:["It provides more time to react","It makes the motorcycle invisible","It removes all hazards","It guarantees overtaking"],
+a:["It provides more time to react","It makes the motorcycle invisible","It removes hazards","It guarantees overtaking"],
 c:0
 },
 
 {
-q:"Car drivers should be aware that motorcycles:",
+q:"Car drivers should remember that motorcycles:",
 a:["Can be smaller and harder to see in traffic","Always travel faster","Never use indicators","Cannot change lanes"],
 c:0
 },
 
 {
-q:"When carrying a pillion passenger, the motorcycle rider should:",
-a:["Follow the applicable passenger and equipment requirements","Ignore weight and balance","Allow the passenger to stand","Allow an unsecured passenger"],
+q:"When carrying a passenger, the motorcycle rider should:",
+a:["Follow the applicable passenger and equipment requirements","Ignore balance","Allow the passenger to stand","Leave them unsecured"],
 c:0
 },
 
 {
-q:"Motorcycle riders should take extra care around road surfaces containing:",
-a:["Loose gravel, oil, wet leaves or other reduced-grip material","Only clean dry asphalt","Nothing unusual","Painted buildings"],
+q:"Motorcycle riders should take extra care around:",
+a:["Loose gravel, oil, wet leaves and reduced-grip surfaces","Only clean asphalt","Buildings","Traffic lights only"],
 c:0
 },
 
 {
-q:"The safest way to approach a bend is generally to:",
-a:["Adjust speed before the bend and maintain control","Accelerate sharply midway through it","Brake suddenly while leaned over","Look only at the edge of the road"],
+q:"A safe approach to a bend is generally to:",
+a:["Adjust speed before the bend and maintain control","Accelerate sharply","Brake suddenly while leaned","Look away"],
 c:0
 }
 
 ];
 
+
 const CAR = [
 
 {
-q:"Before moving off from the kerb, you should:",
-a:["Check mirrors, blind spots and signal as required","Only check the speedometer","Accelerate immediately","Sound the horn"],
+q:"Before moving off from the kerb you should:",
+a:["Check mirrors, blind spots and signal as required","Only check speed","Accelerate","Sound the horn"],
 c:0
 },
 
 {
-q:"At an intersection, you should:",
-a:["Follow signs, signals and applicable give-way rules","Always assume you have priority","Always stop even when not required","Ignore turning vehicles"],
+q:"At an intersection you should:",
+a:["Follow signs, signals and applicable give-way rules","Always assume priority","Always stop","Ignore turning vehicles"],
 c:0
 },
 
 {
-q:"When reversing, you should:",
+q:"When reversing you should:",
 a:["Check the area carefully and reverse only when safe","Rely entirely on sensors","Reverse quickly","Look only forward"],
 c:0
 },
 
 {
 q:"A seatbelt should be:",
-a:["Worn correctly whenever required","Held in your hand","Used only on highways","Shared between passengers"],
+a:["Worn correctly whenever required","Held in your hand","Used only on highways","Shared"],
 c:0
 },
 
 {
-q:"If your vehicle begins to skid, you should:",
-a:["Stay calm and take appropriate corrective action without panic","Accelerate hard immediately","Close your eyes","Turn randomly"],
+q:"If your vehicle begins to skid you should:",
+a:["Stay calm and take appropriate corrective action","Accelerate hard","Close your eyes","Turn randomly"],
 c:0
 },
 
 {
-q:"When approaching a pedestrian crossing, you should:",
-a:["Reduce speed and be prepared to give way as required","Accelerate through it","Use the horn continuously","Ignore pedestrians"],
+q:"When approaching a pedestrian crossing you should:",
+a:["Reduce speed and be prepared to give way as required","Accelerate","Use the horn","Ignore pedestrians"],
 c:0
 },
 
 {
-q:"A learner driver should follow the conditions of their learner licence:",
+q:"A learner driver should follow the conditions of their licence:",
 a:["At all times","Only during testing","Only when police are nearby","Only on weekends"],
 c:0
 },
 
 {
-q:"Before overtaking, you should make sure:",
-a:["It is legal, safe and there is enough clear distance","The vehicle ahead is slow","You can use the footpath","There is no need to signal"],
+q:"Before overtaking you should make sure:",
+a:["It is legal, safe and there is enough clear distance","The vehicle is slow","You can use the footpath","There is no need to signal"],
 c:0
 },
 
 {
-q:"When approaching roadworks, you should:",
-a:["Follow temporary signs, traffic controllers and changed conditions","Ignore temporary signs","Drive around barriers","Increase speed"],
+q:"When approaching roadworks you should:",
+a:["Follow temporary signs, traffic controllers and changed conditions","Ignore signs","Drive around barriers","Increase speed"],
 c:0
 },
 
 {
-q:"If you feel too tired to continue driving safely:",
-a:["Stop and rest before continuing","Turn the music louder","Open the window and keep going","Drive faster"],
+q:"If you are too tired to continue driving safely:",
+a:["Stop and rest before continuing","Turn music louder","Open the window","Drive faster"],
 c:0
 }
 
 ];
+
 
 const MR = [
 ...COMMON,
 {
-q:"For a medium rigid vehicle, drivers should pay particular attention to:",
-a:["Vehicle dimensions, braking, clearance and load security","Only radio volume","Only tyre colour","Passenger entertainment"],
+q:"A medium rigid vehicle driver should pay particular attention to:",
+a:["Vehicle dimensions, braking, clearance and load security","Only radio volume","Only vehicle colour","Passenger entertainment"],
 c:0
 },
 {
 q:"A larger vehicle may require more space when:",
-a:["Turning and manoeuvring","Using a parking meter","Waiting at a red light","Using a radio"],
+a:["Turning and manoeuvring","Using a parking meter","Waiting at lights","Using the radio"],
 c:0
 }
 ];
+
 
 const HR = [
 ...COMMON,
 {
 q:"A heavy rigid vehicle requires careful management of:",
-a:["Braking distance, vehicle size, load and road position","Only air conditioning","Only mirrors when parked","Only fuel consumption"],
+a:["Braking distance, vehicle size, load and road position","Only air conditioning","Only mirrors","Only fuel"],
 c:0
 },
 {
-q:"Before operating a heavy vehicle, the driver should:",
-a:["Carry out required checks and ensure the vehicle is safe","Skip all checks","Only inspect the horn","Only check the paint"],
+q:"Before operating a heavy vehicle the driver should:",
+a:["Carry out required checks and ensure the vehicle is safe","Skip checks","Inspect only the horn","Inspect only the paint"],
 c:0
 }
 ];
+
 
 const HC = [
 ...COMMON,
@@ -1440,315 +2217,458 @@ a:["Combination length, turning path, braking and stability","Only cab temperatu
 c:0
 },
 {
-q:"When turning a long combination vehicle, the driver should:",
-a:["Allow for the swept path of the combination","Turn as tightly as a small car","Drive onto the footpath whenever needed","Ignore trailers"],
+q:"When turning a long combination vehicle the driver should:",
+a:["Allow for the swept path of the combination","Turn as tightly as a car","Use the footpath","Ignore trailers"],
 c:0
 }
 ];
+
 
 const MC = [
 ...COMMON,
 {
 q:"A road train requires particular attention to:",
-a:["Combination length, turning path, braking and following traffic","Only the cab radio","Only the horn","Only the front bumper"],
+a:["Combination length, turning path, braking and following traffic","Only the cab radio","Only the horn","Only the bumper"],
 c:0
 },
 {
-q:"When operating a multi-combination vehicle, the driver should:",
+q:"When operating a multi-combination vehicle the driver should:",
 a:["Maintain appropriate clearance and control for the entire combination","Only monitor the prime mover","Ignore the rear trailer","Use the shoulder for every turn"],
 c:0
 },
 {
 q:"The rear of a long combination vehicle may:",
-a:["Follow a different path from the front during turns","Always follow exactly the same path","Never move sideways","Stop before the front"],
+a:["Follow a different path from the front during turns","Always follow the same path","Never move sideways","Stop before the front"],
 c:0
 }
 ];
 
-// ------------------------------------------------------------
-// CATEGORY MAP
-// ------------------------------------------------------------
-
-const CATEGORY_NAMES = {
-  tourist:"Australian Tourist Traffic Rules",
-  bike:"Bike / Motorcycle",
-  car:"Car / Learner",
-  mr:"MR — Medium Rigid",
-  hr:"HR — Heavy Rigid",
-  hc:"HC — Heavy Combination",
-  mc:"MC — Multi Combination"
-};
 
 const BANKS = {
-  tourist:TOURIST,
-  bike:BIKE,
-  car:CAR,
-  mr:MR,
-  hr:HR,
-  hc:HC,
-  mc:MC
+tourist:TOURIST,
+bike:BIKE,
+car:CAR,
+mr:MR,
+hr:HR,
+hc:HC,
+mc:MC
 };
 
-// ------------------------------------------------------------
-// STATE-SPECIFIC NOTES
-// ------------------------------------------------------------
 
-const STATE_NOTES = {
-  VIC:"Victoria",
-  NSW:"New South Wales",
-  QLD:"Queensland",
-  WA:"Western Australia",
-  SA:"South Australia",
-  TAS:"Tasmania",
-  NT:"Northern Territory",
-  ACT:"Australian Capital Territory"
+const CATEGORY_NAMES = {
+tourist:"Australian Tourist Rules",
+bike:"Bike / Motorcycle",
+car:"Car / Learner",
+mr:"MR — Medium Rigid",
+hr:"HR — Heavy Rigid",
+hc:"HC — Heavy Combination",
+mc:"MC — Multi Combination"
 };
 
-// ------------------------------------------------------------
-// APP STATE
-// ------------------------------------------------------------
 
-let currentCategory = null;
-let currentState = "VIC";
-let currentSet = 1;
-let currentQuestions = [];
-let currentQuestionIndex = 0;
-let selectedAnswer = null;
-let answers = [];
-let score = 0;
+/* ============================================================
+   STATE
+   ============================================================ */
 
-// ------------------------------------------------------------
-// HELPERS
-// ------------------------------------------------------------
+const STATE_NAMES = {
+VIC:"Victoria",
+NSW:"New South Wales",
+QLD:"Queensland",
+WA:"Western Australia",
+SA:"South Australia",
+TAS:"Tasmania",
+NT:"Northern Territory",
+ACT:"Australian Capital Territory"
+};
+
+
+/* ============================================================
+   APP VARIABLES
+   ============================================================ */
+
+let currentCategory=null;
+let currentState="VIC";
+let currentSet=1;
+let currentQuestions=[];
+let currentQuestionIndex=0;
+let selectedAnswer=null;
+let score=0;
+
+
+/* ============================================================
+   SHUFFLE
+   ============================================================ */
 
 function shuffle(array){
-  const arr = [...array];
 
-  for(let i = arr.length - 1; i > 0; i--){
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i],arr[j]] = [arr[j],arr[i]];
+  const result=[...array];
+
+  for(
+    let i=result.length-1;
+    i>0;
+    i--
+  ){
+
+    const j=
+      Math.floor(
+        Math.random()*(i+1)
+      );
+
+    [
+      result[i],
+      result[j]
+    ]=[
+      result[j],
+      result[i]
+    ];
   }
 
-  return arr;
+  return result;
 }
 
-function makeQuestion(question){
 
-  const optionObjects = question.a.map((text,index)=>({
-    text,
-    correct:index === question.c
-  }));
+/* ============================================================
+   BUILD QUESTION
+   ============================================================ */
 
-  const shuffled = shuffle(optionObjects);
+function prepareQuestion(question){
+
+  const options=
+    question.a.map(
+      (text,index)=>({
+        text,
+        correct:index===question.c
+      })
+    );
+
+  const shuffled=
+    shuffle(options);
 
   return {
     q:question.q,
-    options:shuffled.map(x=>x.text),
-    correct:shuffled.findIndex(x=>x.correct)
+    options:
+      shuffled.map(
+        item=>item.text
+      ),
+    correct:
+      shuffled.findIndex(
+        item=>item.correct
+      )
   };
 }
 
+
+/* ============================================================
+   BUILD TEST
+   ============================================================ */
+
 function buildTest(category){
 
-  const bank = BANKS[category] || COMMON;
+  const bank=
+    BANKS[category] || COMMON;
+
+  const selected=[];
 
   /*
-    We cycle through the bank if a category has fewer than
-    10 unique questions. This guarantees every test has
-    exactly 10 questions.
+    Always exactly 10 questions.
   */
 
-  const expanded = [];
+  while(
+    selected.length <
+    QUESTIONS_PER_TEST
+  ){
 
-  for(let i=0;i<QUESTIONS_PER_TEST;i++){
-    expanded.push(bank[i % bank.length]);
+    const shuffled=
+      shuffle(bank);
+
+    for(
+      const question of shuffled
+    ){
+
+      if(
+        selected.length >=
+        QUESTIONS_PER_TEST
+      ){
+        break;
+      }
+
+      selected.push(question);
+    }
   }
 
-  return shuffle(expanded).map(makeQuestion);
+  return shuffle(selected)
+    .map(prepareQuestion);
 }
 
-function getSetNumber(category){
 
-  const key = "aussielearner_set_" + category;
+/* ============================================================
+   SET COUNTER
+   ============================================================ */
 
-  let number = Number(localStorage.getItem(key) || 0);
+function getNextSet(category){
 
-  number++;
+  const key=
+    "aussielearner_" +
+    category +
+    "_set";
 
-  if(number > TOTAL_SETS){
-    number = 1;
+  let set=
+    Number(
+      localStorage.getItem(key) || 0
+    );
+
+  set++;
+
+  if(set>100){
+    set=1;
   }
 
-  localStorage.setItem(key,number);
+  localStorage.setItem(
+    key,
+    set
+  );
 
-  return number;
+  return set;
 }
 
-// ------------------------------------------------------------
-// NAVIGATION
-// ------------------------------------------------------------
+
+/* ============================================================
+   SCROLL
+   ============================================================ */
 
 function scrollToTests(){
-  document.getElementById("tests").scrollIntoView({
-    behavior:"smooth"
-  });
+
+  document
+    .getElementById("tests")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
 }
+
 
 function scrollToState(){
-  document.getElementById("statePanel").scrollIntoView({
-    behavior:"smooth"
-  });
+
+  document
+    .getElementById("statePanel")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
 }
 
-// ------------------------------------------------------------
-// START TEST
-// ------------------------------------------------------------
+
+/* ============================================================
+   START TEST
+   ============================================================ */
 
 function startTest(category){
 
-  currentCategory = category;
-  currentState = document.getElementById("stateSelect").value;
-  currentSet = getSetNumber(category);
+  currentCategory=category;
 
-  currentQuestions = buildTest(category);
+  currentState=
+    document.getElementById(
+      "stateSelect"
+    ).value;
 
-  currentQuestionIndex = 0;
-  selectedAnswer = null;
-  answers = [];
-  score = 0;
+  currentSet=
+    getNextSet(category);
 
-  document.getElementById("homeScreen").style.display = "none";
-  document.getElementById("testScreen").style.display = "block";
+  currentQuestions=
+    buildTest(category);
+
+  currentQuestionIndex=0;
+  selectedAnswer=null;
+  score=0;
+
+  document
+    .getElementById("homeScreen")
+    .style.display="none";
+
+  document
+    .getElementById("testScreen")
+    .style.display="block";
 
   window.scrollTo({
     top:0,
     behavior:"smooth"
   });
 
-  document.getElementById("testTypeChip").textContent =
+  document
+    .getElementById("testTypeChip")
+    .textContent=
     CATEGORY_NAMES[category];
 
-  document.getElementById("stateChip").textContent =
+  document
+    .getElementById("stateChip")
+    .textContent=
     currentState;
 
-  document.getElementById("setChip").textContent =
-    "Set " + currentSet + " / " + TOTAL_SETS;
+  document
+    .getElementById("setChip")
+    .textContent=
+    "Set "+currentSet;
 
   renderQuestion();
 }
 
-// ------------------------------------------------------------
-// RENDER QUESTION
-// ------------------------------------------------------------
+
+/* ============================================================
+   RENDER QUESTION
+   ============================================================ */
 
 function renderQuestion(){
 
-  const question = currentQuestions[currentQuestionIndex];
+  const question=
+    currentQuestions[
+      currentQuestionIndex
+    ];
 
-  selectedAnswer = null;
+  selectedAnswer=null;
 
-  const percentage =
-    ((currentQuestionIndex + 1) / QUESTIONS_PER_TEST) * 100;
+  const percent=
+    (
+      (currentQuestionIndex+1) /
+      QUESTIONS_PER_TEST
+    )*100;
 
-  document.getElementById("progressBar").style.width =
-    percentage + "%";
+  document
+    .getElementById("progressBar")
+    .style.width=
+    percent+"%";
 
-  const letters = ["A","B","C","D"];
+  const letters=[
+    "A","B","C","D"
+  ];
 
-  const html = `
-    <div class="question-card" key="${Date.now()}">
+  document
+    .getElementById("questionArea")
+    .innerHTML=`
 
-      <div class="question-number">
-        QUESTION ${currentQuestionIndex + 1} OF ${QUESTIONS_PER_TEST}
-      </div>
+<div class="question-card">
 
-      <h2>${escapeHtml(question.q)}</h2>
+<div class="question-number">
+QUESTION ${currentQuestionIndex+1}
+OF ${QUESTIONS_PER_TEST}
+</div>
 
-      <div class="answers">
-        ${question.options.map((option,index)=>`
-          <button
-            class="answer"
-            onclick="selectAnswer(${index})"
-            id="answer-${index}"
-          >
-            <span class="answer-letter">${letters[index]}</span>
-            <span>${escapeHtml(option)}</span>
-          </button>
-        `).join("")}
-      </div>
+<h2>
+${escapeHTML(question.q)}
+</h2>
 
-      <div class="test-actions">
+<div class="answers">
 
-        <button
-          class="btn btn-secondary"
-          onclick="confirmExit()"
-        >
-          Exit
-        </button>
+${question.options.map(
+(option,index)=>`
 
-        <button
-          class="btn btn-primary"
-          id="nextButton"
-          disabled
-          onclick="nextQuestion()"
-        >
-          ${currentQuestionIndex === QUESTIONS_PER_TEST - 1
-            ? "Finish Test"
-            : "Next Question →"}
-        </button>
+<button
+class="answer"
+id="answer-${index}"
+onclick="selectAnswer(${index})"
+>
 
-      </div>
+<span class="answer-letter">
+${letters[index]}
+</span>
 
-    </div>
-  `;
+<span>
+${escapeHTML(option)}
+</span>
 
-  document.getElementById("questionArea").innerHTML = html;
+</button>
+
+`).join("")}
+
+</div>
+
+
+<div class="test-actions">
+
+<button
+class="btn btn-secondary"
+onclick="confirmExit()"
+>
+Exit
+</button>
+
+<button
+id="nextButton"
+class="btn btn-primary"
+disabled
+onclick="nextQuestion()"
+>
+${
+currentQuestionIndex ===
+QUESTIONS_PER_TEST-1
+?"Finish Test"
+:"Next Question →"
+}
+</button>
+
+</div>
+
+</div>
+
+`;
 }
 
-// ------------------------------------------------------------
-// ANSWER SELECTION
-// ------------------------------------------------------------
+
+/* ============================================================
+   SELECT ANSWER
+   ============================================================ */
 
 function selectAnswer(index){
 
-  selectedAnswer = index;
+  selectedAnswer=index;
 
-  document.querySelectorAll(".answer").forEach((button,i)=>{
-    button.classList.toggle(
-      "selected",
-      i === index
+  document
+    .querySelectorAll(".answer")
+    .forEach(
+      (button,i)=>{
+
+        button.classList.toggle(
+          "selected",
+          i===index
+        );
+
+      }
     );
-  });
 
-  document.getElementById("nextButton").disabled = false;
+  document
+    .getElementById("nextButton")
+    .disabled=false;
 }
 
-// ------------------------------------------------------------
-// NEXT QUESTION
-// ------------------------------------------------------------
+
+/* ============================================================
+   NEXT
+   ============================================================ */
 
 function nextQuestion(){
 
-  if(selectedAnswer === null){
+  if(
+    selectedAnswer===null
+  ){
     return;
   }
 
-  const correct =
-    currentQuestions[currentQuestionIndex].correct;
+  const correct=
+    currentQuestions[
+      currentQuestionIndex
+    ].correct;
 
-  answers.push({
-    question:currentQuestions[currentQuestionIndex].q,
-    selected:selectedAnswer,
-    correct
-  });
-
-  if(selectedAnswer === correct){
+  if(
+    selectedAnswer===correct
+  ){
     score++;
   }
 
-  if(currentQuestionIndex === QUESTIONS_PER_TEST - 1){
+  if(
+    currentQuestionIndex===
+    QUESTIONS_PER_TEST-1
+  ){
+
     showResult();
     return;
+
   }
 
   currentQuestionIndex++;
@@ -1756,113 +2676,146 @@ function nextQuestion(){
   renderQuestion();
 }
 
-// ------------------------------------------------------------
-// RESULT
-// ------------------------------------------------------------
+
+/* ============================================================
+   RESULT
+   ============================================================ */
 
 function showResult(){
 
-  const incorrect =
-    QUESTIONS_PER_TEST - score;
+  const incorrect=
+    QUESTIONS_PER_TEST-score;
 
-  const passed =
-    score >= PRACTICE_PASS;
+  const percentage=
+    Math.round(
+      score /
+      QUESTIONS_PER_TEST *
+      100
+    );
 
-  const percentage =
-    Math.round((score / QUESTIONS_PER_TEST) * 100);
+  const passed=
+    score>=PRACTICE_PASS;
 
-  document.getElementById("progressBar").style.width = "100%";
+  document
+    .getElementById("progressBar")
+    .style.width="100%";
 
-  document.getElementById("questionArea").innerHTML = `
-    <div class="result">
+  document
+    .getElementById("questionArea")
+    .innerHTML=`
 
-      <div class="result-icon">
-        ${passed ? "✓" : "!"}
-      </div>
+<div class="result">
 
-      <p>
-        ${CATEGORY_NAMES[currentCategory]}
-        • ${STATE_NOTES[currentState]}
-      </p>
+<div class="result-icon">
+${passed?"✓":"!"}
+</div>
 
-      <h2 class="${passed ? "pass" : "fail"}">
-        ${passed ? "Practice Passed" : "Keep Practising"}
-      </h2>
+<p>
+${CATEGORY_NAMES[currentCategory]}
+•
+${STATE_NAMES[currentState]}
+</p>
 
-      <div class="score">
-        ${score}/${QUESTIONS_PER_TEST}
-      </div>
+<h2 class="${passed?"pass":"fail"}">
+${passed
+?"Practice Passed"
+:"Keep Practising"}
+</h2>
 
-      <p>
-        Final result — ${percentage}%
-      </p>
+<div class="score">
+${score}/${QUESTIONS_PER_TEST}
+</div>
 
-      <div class="stats">
+<p>
+Final result — ${percentage}%
+</p>
 
-        <div class="stat">
-          <strong class="pass">${score}</strong>
-          <span>Correct</span>
-        </div>
+<div class="stats">
 
-        <div class="stat">
-          <strong class="fail">${incorrect}</strong>
-          <span>Incorrect</span>
-        </div>
+<div class="stat">
+<strong class="pass">
+${score}
+</strong>
+<span>Correct</span>
+</div>
 
-        <div class="stat">
-          <strong>${PRACTICE_PASS}/${QUESTIONS_PER_TEST}</strong>
-          <span>Practice Pass Mark</span>
-        </div>
+<div class="stat">
+<strong class="fail">
+${incorrect}
+</strong>
+<span>Incorrect</span>
+</div>
 
-      </div>
+<div class="stat">
+<strong>
+${PRACTICE_PASS}/${QUESTIONS_PER_TEST}
+</strong>
+<span>Practice Pass Mark</span>
+</div>
 
-      <p style="max-width:650px;margin:0 auto 25px;">
-        Your answers are scored only after the complete test.
-        No correct answer is revealed while you are answering.
-      </p>
+</div>
 
-      <div class="hero-actions" style="justify-content:center;">
+<p style="max-width:650px;margin:0 auto 25px">
 
-        <button
-          class="btn btn-primary"
-          onclick="startTest('${currentCategory}')"
-        >
-          🔄 New Set
-        </button>
+Your answers are scored only after
+you complete the entire test.
+Correct answers are not revealed
+during the test.
 
-        <button
-          class="btn btn-secondary"
-          onclick="goHome()"
-        >
-          ← Back to Home
-        </button>
+</p>
 
-      </div>
+<div class="hero-buttons"
+style="justify-content:center">
 
-    </div>
-  `;
+<button
+class="btn btn-primary"
+onclick="startTest('${currentCategory}')"
+>
+🔄 New Set
+</button>
+
+<button
+class="btn btn-secondary"
+onclick="goHome()"
+>
+← Home
+</button>
+
+</div>
+
+</div>
+
+`;
 }
 
-// ------------------------------------------------------------
-// EXIT
-// ------------------------------------------------------------
+
+/* ============================================================
+   EXIT
+   ============================================================ */
 
 function confirmExit(){
 
-  const leave =
+  if(
     confirm(
       "Leave this test? Your current answers will be lost."
-    );
+    )
+  ){
 
-  if(leave){
     goHome();
+
   }
 }
 
+
 function goHome(){
 
-  document.getElementById("testScreen").style.display = "none";
-  document.getElementById("homeScreen").style.display = "block";
+  document
+    .getElementById("testScreen")
+    .style.display="none";
+
+  document
+    .getElementById("homeScreen")
+    .style.display="block";
 
   window.scrollTo({
     top:0,
@@ -1870,11 +2823,12 @@ function goHome(){
   });
 }
 
-// ------------------------------------------------------------
-// ESCAPE HTML
-// ------------------------------------------------------------
 
-function escapeHtml(value){
+/* ============================================================
+   HTML ESCAPE
+   ============================================================ */
+
+function escapeHTML(value){
 
   return String(value)
     .replaceAll("&","&amp;")
@@ -1884,68 +2838,102 @@ function escapeHtml(value){
     .replaceAll("'","&#039;");
 }
 
-// ------------------------------------------------------------
-// STATE PERSISTENCE
-// ------------------------------------------------------------
 
-document
-  .getElementById("stateSelect")
-  .addEventListener("change",function(){
+/* ============================================================
+   STATE MEMORY
+   ============================================================ */
 
-    currentState = this.value;
+const stateSelect=
+  document.getElementById(
+    "stateSelect"
+  );
+
+const savedState=
+  localStorage.getItem(
+    "aussielearner_state"
+  );
+
+if(
+  savedState &&
+  stateSelect.querySelector(
+    `option[value="${savedState}"]`
+  )
+){
+
+  stateSelect.value=
+    savedState;
+
+}
+
+
+stateSelect.addEventListener(
+  "change",
+  function(){
 
     localStorage.setItem(
       "aussielearner_state",
-      currentState
+      this.value
     );
-  });
 
-const savedState =
-  localStorage.getItem("aussielearner_state");
-
-if(savedState &&
-   document.querySelector(
-     `#stateSelect option[value="${savedState}"]`
-   )){
-  document.getElementById("stateSelect").value =
-    savedState;
-}
-
-// ------------------------------------------------------------
-// KEYBOARD SUPPORT
-// ------------------------------------------------------------
-
-document.addEventListener("keydown",function(event){
-
-  if(
-    document.getElementById("testScreen").style.display !== "block"
-  ){
-    return;
   }
+);
 
-  const key = event.key.toLowerCase();
 
-  const map = {
-    a:0,
-    b:1,
-    c:2,
-    d:3
-  };
+/* ============================================================
+   KEYBOARD
+   ============================================================ */
 
-  if(
-    Object.prototype.hasOwnProperty.call(map,key) &&
-    document.getElementById("answer-" + map[key])
-  ){
-    selectAnswer(map[key]);
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(
+      document.getElementById(
+        "testScreen"
+      ).style.display!=="block"
+    ){
+      return;
+    }
+
+    const map={
+      a:0,
+      b:1,
+      c:2,
+      d:3
+    };
+
+    const key=
+      event.key.toLowerCase();
+
+    if(
+      Object.prototype.hasOwnProperty.call(
+        map,
+        key
+      )
+    ){
+
+      const button=
+        document.getElementById(
+          "answer-"+map[key]
+        );
+
+      if(button){
+        selectAnswer(map[key]);
+      }
+
+    }
+
+    if(
+      event.key==="Enter" &&
+      selectedAnswer!==null
+    ){
+
+      nextQuestion();
+
+    }
+
   }
-
-  if(
-    event.key === "Enter" &&
-    selectedAnswer !== null
-  ){
-    nextQuestion();
-  }
-});
+);
 
 </script>
 
