@@ -3,122 +3,62 @@ const questions = {
     learner: [
 
         {
+            category: "INTERSECTIONS",
+
+            question:
+                "You approach an intersection and another vehicle is turning across your path. What should you do?",
+
+            answers: [
+                "Accelerate to get through first",
+                "Slow down and be prepared to stop",
+                "Drive onto the shoulder",
+                "Ignore the other vehicle"
+            ],
+
+            correct: 1,
+
+            explanation:
+                "You should approach the situation cautiously and be prepared to stop if necessary."
+        },
+
+
+        {
             category: "SAFE FOLLOWING",
 
             question:
-                "In good driving conditions, what following distance should you generally allow from the vehicle ahead?",
+                "Why should you leave a safe following distance behind the vehicle in front?",
 
             answers: [
-                "One second",
-                "At least two seconds",
-                "Half a car length",
-                "As close as possible"
-            ],
-
-            correct: 1,
-
-            explanation:
-                "In good conditions, you should allow at least a two-second gap from the vehicle ahead. You may need more space in poor conditions."
-        },
-
-
-        {
-            category: "TRAFFIC LIGHTS",
-
-            question:
-                "A red traffic light is showing as you approach an intersection. What must you do?",
-
-            answers: [
-                "Slow down and continue",
-                "Stop before entering the intersection",
-                "Sound your horn and continue",
-                "Enter if there are no pedestrians"
-            ],
-
-            correct: 1,
-
-            explanation:
-                "A red traffic light requires you to stop before entering the intersection."
-        },
-
-
-        {
-            category: "BLIND SPOTS",
-
-            question:
-                "What should you do before changing lanes to check for vehicles in a blind spot?",
-
-            answers: [
-                "Only check the rear-view mirror",
-                "Perform an appropriate head check",
-                "Sound the horn",
-                "Speed up"
-            ],
-
-            correct: 1,
-
-            explanation:
-                "Mirrors do not show every area around your vehicle. An appropriate head check helps you identify vehicles that may be in a blind spot."
-        },
-
-
-        {
-            category: "WET WEATHER",
-
-            question:
-                "What can happen to your stopping distance on a wet road?",
-
-            answers: [
-                "It can increase",
-                "It always decreases",
-                "It stays exactly the same",
-                "It becomes zero"
+                "To allow time to react if the vehicle slows suddenly",
+                "So another driver cannot merge",
+                "To increase your speed",
+                "To make overtaking easier"
             ],
 
             correct: 0,
 
             explanation:
-                "Wet conditions can reduce available grip and increase stopping distance."
+                "A safe following distance provides time to react to changes in traffic."
         },
 
 
         {
-            category: "FATIGUE",
+            category: "ROAD SIGNS",
 
             question:
-                "Why is driver fatigue dangerous?",
+                "What is the purpose of a warning sign?",
 
             answers: [
-                "It improves concentration",
-                "It can reduce alertness and reaction ability",
-                "It improves night vision",
-                "It makes braking faster"
+                "To advertise nearby businesses",
+                "To warn road users about a hazard or changed road condition",
+                "To show the nearest fuel station",
+                "To indicate a parking price"
             ],
 
             correct: 1,
 
             explanation:
-                "Fatigue can reduce alertness, concentration and reaction ability."
-        },
-
-
-        {
-            category: "MOBILE PHONES",
-
-            question:
-                "What is a major danger of using a mobile phone while driving?",
-
-            answers: [
-                "It improves your awareness",
-                "It can distract your attention from driving",
-                "It shortens stopping distance",
-                "It improves your reaction time"
-            ],
-
-            correct: 1,
-
-            explanation:
-                "Using a mobile phone can distract you from the road and surrounding traffic."
+                "Warning signs alert road users to hazards or conditions that require attention."
         },
 
 
@@ -129,180 +69,76 @@ const questions = {
                 "When approaching a pedestrian crossing, what should you do?",
 
             answers: [
-                "Maintain your speed",
+                "Maintain speed regardless of pedestrians",
                 "Slow down and be prepared to stop",
-                "Sound your horn continuously",
-                "Move onto the wrong side of the road"
+                "Sound the horn until pedestrians move",
+                "Move onto the opposite side of the road"
             ],
 
             correct: 1,
 
             explanation:
-                "You should approach pedestrian crossings carefully and be prepared to stop where required."
+                "Approach crossings carefully and be prepared to stop for pedestrians where required."
         },
 
 
         {
-            category: "EMERGENCY VEHICLES",
+            category: "SPEED",
 
             question:
-                "An emergency vehicle approaches using its warning devices. What should you do?",
+                "What should determine the speed you travel at?",
 
             answers: [
-                "Ignore it",
-                "Take appropriate action to allow it to pass safely",
-                "Accelerate",
-                "Follow it closely"
+                "Only the posted speed limit",
+                "Road, traffic and weather conditions as well as the speed limit",
+                "The speed of the fastest vehicle",
+                "The speed of the vehicle behind you"
             ],
 
             correct: 1,
 
             explanation:
-                "You should take appropriate action to allow the emergency vehicle to proceed safely."
-        }
-
-    ],
-
-
-    motorcycle: [
-
-        {
-            category: "MOTORCYCLE VISIBILITY",
-
-            question:
-                "Why should motorcycle riders consider whether other road users can see them?",
-
-            answers: [
-                "Motorcycles can be less noticeable than larger vehicles",
-                "Motorcycles are impossible to see",
-                "Only pedestrians need to see motorcycles",
-                "Visibility does not matter"
-            ],
-
-            correct: 0,
-
-            explanation:
-                "Motorcycles can be smaller and less noticeable to other road users, so riders should actively manage their visibility."
+                "A posted speed limit is a maximum, not a target speed for every condition."
         },
 
 
         {
-            category: "PROTECTIVE EQUIPMENT",
+            category: "DISTRACTION",
 
             question:
-                "Why is appropriate protective equipment important for motorcycle riders?",
+                "What is one major danger of using a mobile phone while driving?",
 
             answers: [
-                "It guarantees you will not crash",
-                "It can reduce the severity of injuries in a crash",
-                "It allows you to exceed the speed limit",
-                "It replaces safe riding"
+                "It improves concentration",
+                "It can distract you from the road and surrounding traffic",
+                "It makes the vehicle more stable",
+                "It improves your reaction time"
             ],
 
             correct: 1,
 
             explanation:
-                "Protective equipment can reduce the severity of injuries but cannot guarantee that a crash will not happen."
+                "Using a mobile phone can take your attention away from driving."
         },
 
 
         {
-            category: "CORNERING",
+            category: "ROAD POSITION",
 
             question:
-                "What should you do when approaching an unfamiliar bend on a motorcycle?",
+                "Why is it important to maintain an appropriate road position?",
 
             answers: [
-                "Enter at a speed that allows you to safely manage the bend",
-                "Accelerate hard",
-                "Close your eyes briefly",
-                "Assume the road is clear"
+                "To communicate your intentions and maintain a safe path",
+                "To prevent all other vehicles from passing",
+                "To drive as close as possible to parked vehicles",
+                "To avoid using indicators"
             ],
 
             correct: 0,
 
             explanation:
-                "Choose an appropriate speed before entering the bend and look ahead for potential hazards."
-        },
-
-
-        {
-            category: "ROAD SURFACES",
-
-            question:
-                "What should you do when approaching a potentially slippery road surface?",
-
-            answers: [
-                "Use smooth control inputs and adjust your speed",
-                "Accelerate sharply",
-                "Ignore the surface",
-                "Brake as hard as possible"
-            ],
-
-            correct: 0,
-
-            explanation:
-                "Smooth control inputs and an appropriate speed can help maintain motorcycle stability when traction may be reduced."
-        },
-
-
-        {
-            category: "HAZARDS",
-
-            question:
-                "You see a vehicle that could turn across your path. What should you do?",
-
-            answers: [
-                "Assume it will give way",
-                "Be prepared to slow or stop",
-                "Accelerate towards it",
-                "Look away"
-            ],
-
-            correct: 1,
-
-            explanation:
-                "You should anticipate potential hazards and be prepared to slow, stop or take appropriate action."
-        },
-
-
-        {
-            category: "LANE POSITION",
-
-            question:
-                "Why should motorcycle riders consider their position within a lane?",
-
-            answers: [
-                "It can affect visibility and available space",
-                "To prevent all vehicles passing",
-                "To avoid checking mirrors",
-                "Motorcycles must always use the centre"
-            ],
-
-            correct: 0,
-
-            explanation:
-                "Lane position can affect your visibility, available space and how other road users see you."
-        },
-
-
-        {
-            category: "FOLLOWING DISTANCE",
-
-            question:
-                "Why is adequate following distance important for a motorcycle rider?",
-
-            answers: [
-                "It provides more time and space to respond to hazards",
-                "It means braking is unnecessary",
-                "It prevents the vehicle ahead from braking",
-                "It allows you to stop checking traffic"
-            ],
-
-            correct: 0,
-
-            explanation:
-                "Adequate space provides more time to respond if the vehicle ahead slows or another hazard develops."
+                "Appropriate road positioning helps you maintain a safe path and interact safely with other road users."
         },
 
 
@@ -310,19 +146,264 @@ const questions = {
             category: "WEATHER",
 
             question:
-                "Why should a motorcycle rider adjust their riding in poor weather?",
+                "What can happen to your stopping distance on a wet road?",
 
             answers: [
-                "Weather can affect visibility and traction",
-                "Motorcycles become safer",
-                "Rain always increases grip",
-                "Weather cannot affect handling"
+                "It can increase",
+                "It always becomes shorter",
+                "It becomes exactly the same",
+                "It disappears"
             ],
 
             correct: 0,
 
             explanation:
-                "Poor weather can affect visibility, road conditions and available traction."
+                "Reduced grip on wet roads can increase stopping distance."
+        },
+
+
+        {
+            category: "FATIGUE",
+
+            question:
+                "Why is fatigue dangerous when driving?",
+
+            answers: [
+                "It can reduce alertness and reaction ability",
+                "It makes you see road signs more clearly",
+                "It improves concentration",
+                "It guarantees slower driving"
+            ],
+
+            correct: 0,
+
+            explanation:
+                "Fatigue can reduce alertness and affect your ability to react safely."
+        },
+
+
+        {
+            category: "EMERGENCY VEHICLES",
+
+            question:
+                "If an emergency vehicle approaches using warning devices, what should you do?",
+
+            answers: [
+                "Ignore it",
+                "Take appropriate action to allow it to pass safely",
+                "Race ahead of it",
+                "Stop in the middle of the intersection"
+            ],
+
+            correct: 1,
+
+            explanation:
+                "You should respond safely and appropriately so the emergency vehicle can proceed."
+        }
+
+    ],
+
+
+
+    motorcycle: [
+
+        {
+            category: "MOTORCYCLE SAFETY",
+
+            question:
+                "Why is protective riding gear important for motorcycle riders?",
+
+            answers: [
+                "It can reduce the severity of injuries in a crash",
+                "It guarantees you will not crash",
+                "It allows you to ride faster",
+                "It replaces safe riding techniques"
+            ],
+
+            correct: 0,
+
+            explanation:
+                "Protective equipment can reduce injury severity but does not prevent crashes."
+        },
+
+
+        {
+            category: "MOTORCYCLE POSITION",
+
+            question:
+                "Why should a motorcycle rider consider their position within a lane?",
+
+            answers: [
+                "To improve visibility and maintain a safe space",
+                "To prevent other vehicles from using the road",
+                "To avoid checking mirrors",
+                "To always ride directly beside another vehicle"
+            ],
+
+            correct: 0,
+
+            explanation:
+                "Lane position can affect visibility, space and how other road users interact with you."
+        },
+
+
+        {
+            category: "MOTORCYCLE HAZARDS",
+
+            question:
+                "Why can painted road markings require extra care from motorcycle riders?",
+
+            answers: [
+                "They can affect available traction, particularly in some conditions",
+                "They always increase traction",
+                "They are designed only for pedestrians",
+                "They make motorcycles stop automatically"
+            ],
+
+            correct: 0,
+
+            explanation:
+                "Some road surfaces and markings can provide different levels of grip, especially when conditions are wet."
+        },
+
+
+        {
+            category: "MOTORCYCLE VISIBILITY",
+
+            question:
+                "Why should a motorcycle rider actively consider whether other drivers can see them?",
+
+            answers: [
+                "Motorcycles can be less noticeable to other road users",
+                "Motorcycles are always impossible to see",
+                "It allows the rider to ignore traffic",
+                "It removes the need for indicators"
+            ],
+
+            correct: 0,
+
+            explanation:
+                "Motorcycles can be smaller and less noticeable, so riders need to manage visibility carefully."
+        },
+
+
+        {
+            category: "CORNERING",
+
+            question:
+                "What is important when approaching an unfamiliar bend on a motorcycle?",
+
+            answers: [
+                "Choose a safe speed before entering the bend",
+                "Accelerate as hard as possible",
+                "Look only at the road immediately in front",
+                "Close your eyes briefly"
+            ],
+
+            correct: 0,
+
+            explanation:
+                "Appropriate speed and observation before entering a bend are important for maintaining control."
+        },
+
+
+        {
+            category: "FOLLOWING DISTANCE",
+
+            question:
+                "Why is following distance particularly important for motorcycle riders?",
+
+            answers: [
+                "It provides more time and space to respond to hazards",
+                "It allows the rider to stop checking traffic",
+                "It guarantees the vehicle ahead cannot brake",
+                "It removes the need for braking"
+            ],
+
+            correct: 0,
+
+            explanation:
+                "Adequate space gives a rider more time to respond to sudden changes."
+        },
+
+
+        {
+            category: "ROAD SURFACE",
+
+            question:
+                "What should a motorcycle rider do when approaching a potentially slippery surface?",
+
+            answers: [
+                "Reduce speed smoothly and avoid sudden inputs",
+                "Accelerate sharply",
+                "Brake as hard as possible without assessing conditions",
+                "Ignore the surface"
+            ],
+
+            correct: 0,
+
+            explanation:
+                "Smooth control inputs and appropriate speed can help maintain stability."
+        },
+
+
+        {
+            category: "MOTORCYCLE CONTROL",
+
+            question:
+                "Why are smooth braking and acceleration important on a motorcycle?",
+
+            answers: [
+                "They help maintain stability and control",
+                "They make mirrors unnecessary",
+                "They guarantee a clear road",
+                "They increase tyre wear"
+            ],
+
+            correct: 0,
+
+            explanation:
+                "Smooth control inputs can help a rider maintain stability."
+        },
+
+
+        {
+            category: "HAZARD AWARENESS",
+
+            question:
+                "What is a good approach when you identify a potential hazard ahead?",
+
+            answers: [
+                "Identify it early and prepare an appropriate response",
+                "Look away from it",
+                "Accelerate without checking",
+                "Assume it will disappear"
+            ],
+
+            correct: 0,
+
+            explanation:
+                "Early hazard identification gives you more time to respond safely."
+        },
+
+
+        {
+            category: "MOTORCYCLE RIDING",
+
+            question:
+                "Why should motorcycle riders continually scan the road environment?",
+
+            answers: [
+                "To identify changing hazards and plan ahead",
+                "To avoid looking at mirrors",
+                "To increase speed",
+                "Because road conditions never change"
+            ],
+
+            correct: 0,
+
+            explanation:
+                "Continual observation helps riders identify changing hazards and make appropriate decisions."
         }
 
     ]
