@@ -5,6 +5,11 @@ src/ directory    Yes
 App Router        Yes
 Turbopack         Yes
 Import alias      @/*
+cd aussie-learner
+
+npm install framer-motion lucide-react
+
+npm run dev
 aussie-learner/
 │
 ├── public/
